@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>CPR Fixed Costs Assistant</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <style>
+
+                
+                body {
+                    background-image: url("/main-image") ;
+                    background-size: 100vw 100vh;
+                    background-repeat: no-repeat;
+                }
+                h3 {
+                    text-align: center;   
+                    color: azure; 
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                }
+
+                th {
+                    text-align: center;
+                }
+
+                form {
+                    display: inline-block;
+                }
+
+                input{
+                    text-align:center;
+                 }
+                  
+
+                    /* Style the links inside the navigation bar */
+                .topnav a {
+                    float: left;
+                    color: #f2f2f2;
+                    text-align: center;
+                    padding: 24px 5%;
+                    text-decoration: none;
+                    font-size: 17px;
+                }
+
+
+            </style>
+        </head>
+        <body>
+        <div class="topnav">
+            <a href="/" onclick='showHome();' style="width: 100%; background-color: black;"><h3>
+                CPR 45 ASSISTANT</h3></a>
+        </div><br>
+
+        <div class="row">
+
+            <div style="min-width: 33%">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" 
+                style="width: 100%;display: inline-block;">
+                  Injury Law
+                </button>
+                <div class="dropdown-menu" style="min-width: 33%; margin-left: -1%;">
+                  <a class="dropdown-item" onclick=getRta() href="#1">RTA</a>
+                  <a class="dropdown-item" onclick=getEl() href="#2">EL/PL</a>
+                  <a class="dropdown-item" onclick=getTravel() href="#3">Travel</a>
+                </div>
+
+            </div>
+                
+            <div style="min-width: 33%">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" 
+                style="width: 100%;display: inline-block;">
+                  Debt Law
+                </button>
+                <div class="dropdown-menu" style="min-width: 33%; margin-left: 1%;">
+                  <a class="dropdown-item" onclick=getMoney() href="#1">Money</a>
+                  <a class="dropdown-item" onclick=getLand() href="#2">Land</a>
+                  <a class="dropdown-item" onclick=getEnforcing() href="#3">Enforcing</a>
+                </div>
+            </div>
+                
+
+            <div style="min-width: 33%">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" 
+                style="width: 100%; display: inline-block;">
+                  Other Civil
+                </button>
+                <div class="dropdown-menu" style="min-width: 33%; margin-left: 1%;">
+                    <a class="dropdown-item" onclick=getHmrc() href="#2">HMRC</a>
+                  <a class="dropdown-item" onclick=getFast() href="#1">Fast Track</a>
+                  <a class="dropdown-item" onclick=getIp() href="#2">IP</a>
+                  <a class="dropdown-item" onclick=getAarhus() href="#3">Aarhus</a>
+                </div>
+            </div>
+                
+
+        </div>
+      
+        <div id="RTA">
+
+        </div>
+
+        <div id="EL">
+
+        </div>
+
+        <div id="Travel">
+
+        </div>
+
+      <script>
+
+          function getRta(){
+              console.log('RTA working')
+              document.body.style.backgroundImage='none';
+              document.body.style.background='#0d6efd';
+              
+          }
+
+          function getEl(){
+              console.log('EL/PL working')
+              document.body.style.backgroundImage='none';
+              document.body.style.background='#0d6efd';
+          }
+
+          function getTravel(){
+              console.log('Travel working');
+              document.body.style.backgroundImage='none';
+              document.body.style.background='#0d6efd';
+          }
+
+          function getMoney(){
+              console.log('Money working')
+              document.body.style.backgroundImage='none';
+              document.body.style.background='#0dcaf0';
+              
+          }
+
+          function getLand(){
+              console.log('Land working')
+              document.body.style.backgroundImage='none';
+              document.body.style.background='#0dcaf0';
+          }
+
+          function getEnforcing(){
+              console.log('Enforcing working');
+              document.body.style.backgroundImage='none';
+              document.body.style.background='#0dcaf0';
+          }
+
+          function getHmrc(){
+              console.log('HMRC working');
+              document.body.style.backgroundImage='none';
+              document.body.style.background='#282828';
+          }
+
+          function getFast(){
+              console.log('Fast working')
+              document.body.style.backgroundImage='none';
+              document.body.style.background='#282828';
+              
+          }
+
+          function getIp(){
+              console.log('IP working')
+              document.body.style.backgroundImage='none';
+              document.body.style.background='#282828';
+          }
+
+          function getAarhus(){
+              console.log('Aarhus working');
+              document.body.style.backgroundImage='none';
+              document.body.style.background='#282828';
+          }
+
+      </script>
+
+    </body>
+        
+</html>

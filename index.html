@@ -26,7 +26,8 @@
                 h3 {
                     text-align: center;   
                     color: azure; 
-                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 
+                    'Open Sans', 'Helvetica Neue', sans-serif;
                 }
 
                 th {
@@ -40,7 +41,14 @@
                 input{
                     text-align:center;
                  }
-                  
+                
+                 h6{
+                     font-size: 15px;
+                 }
+
+                 p{
+                     font-size: 8px;
+                 }
 
                     /* Style the links inside the navigation bar */
                 .topnav a {
@@ -64,27 +72,27 @@
         <div class="row">
 
             <div style="min-width: 33%">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" 
+                <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" 
                 style="width: 100%;display: inline-block;">
-                  Injury Law
+                  <b>Injury Law</b>
                 </button>
                 <div class="dropdown-menu" style="min-width: 33%; margin-left: -1%;">
-                  <a class="dropdown-item" onclick=getRta() href="#1">All Parties</a>
-                  <a class="dropdown-item" onclick=getEl() href="#2">Applications</a>
-                  <a class="dropdown-item" onclick=getTravel() href="#3">Counterclaims</a>
+                  <a class="dropdown-item" onclick="showHide('substantive')" href="#1">Substantive Case</a>
+                  <a class="dropdown-item" onclick="showHide('applications')" href="#2">Applications</a>
+                  <a class="dropdown-item" onclick="showHide('counterclaims')" href="#3">RTA Counterclaims</a>
                 </div>
 
             </div>
                 
             <div style="min-width: 33%">
-                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" 
+                <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" 
                 style="width: 100%;display: inline-block;">
-                  Debt Law
+                  <b>Debt Law</b>
                 </button>
                 <div class="dropdown-menu" style="min-width: 33%; margin-left: 1%;">
-                  <a class="dropdown-item" onclick=getMoney() href="#1">Money</a>
-                  <a class="dropdown-item" onclick=getLand() href="#2">Land</a>
-                  <a class="dropdown-item" onclick=getEnforcing() href="#3">Enforcing</a>
+                  <a class="dropdown-item" onclick="showHide('money')" href="#1">Money/Goods</a>
+                  <a class="dropdown-item" onclick="showHide('land')" href="#2">Land</a>
+                  <a class="dropdown-item" onclick="showHide('enforcement')" href="#3">Enforcing</a>
                 </div>
             </div>
                 
@@ -92,44 +100,100 @@
             <div style="min-width: 33%">
                 <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" 
                 style="width: 100%; display: inline-block;">
-                  Other Civil
+                  <b>Other Civil</b>
                 </button>
                 <div class="dropdown-menu" style="min-width: 33%; margin-left: 1%;">
-                    <a class="dropdown-item" onclick=getHmrc() href="#2">HMRC</a>
-                  <a class="dropdown-item" onclick=getFast() href="#1">Fast Track</a>
-                  <a class="dropdown-item" onclick=getIp() href="#2">IP</a>
-                  <a class="dropdown-item" onclick=getAarhus() href="#3">Aarhus</a>
+                    <a class="dropdown-item" onclick="showHide('hmrc')" href="#2">HMRC</a>
+                  <a class="dropdown-item" onclick="showHide('fasttrack')" href="#1">Fast Track</a>
+                  <a class="dropdown-item" onclick="showHide('ip')" href="#2">IP</a>
+                  <a class="dropdown-item" onclick="showHide('aarhus')" href="#3">Aarhus</a>
                 </div>
             </div>
                 
 
         </div>
       
-        <div id="RTA" style="display: none; background: #0275d8">
-
-            <form action="/showAnswer" method="POST">
+        <div id="substantive" style="display: none;">
+            <br><h5 style="color: gray;">Injury - Substantive Case</h5>
+            <form action="/showSubstantive" method="POST">
                 <table class="center" id="center1">
-                    <tr>
-                        <td><label for="base0"></label><h6>TRACK</h6></td>
-                        <td><label for="interest0"></label><h6>PORTAL</h6></td>
+
+                    <tr style="margin-bottom: 1%;">
+                        <td><label for="exceptions"></label><h6>EXCEPTIONS <a style="color: blue;"
+                            onclick="alert(exceptions())"><b>&#9432</b></a></h6></td>
+                        <td colspan="2"><label for="weighting"></label><h6>WEIGHTING <a style="color: blue;"
+                            onclick="alert(weighting())"><b>&#9432</b></a></h6></td>
+                    </tr>
+                    <tr><td>
+                        <select name="exceptions" id="exceptions" style="width: 160px";>
+                            <option value="blank" style="text-align: center;"></option>
+                            <option value="yes" style="text-align: center;">Yes</option>
+                            <option value="no" style="text-align: center;">No</option>
+                          </select>
+                    </td>
+                    <td>
+                        <select name="weighting" id="weighting" style="width: 170px;">
+                            <option value="blank" style="text-align: center;"></option>
+                            <option value="yes" style="text-align: center;">Yes</option>
+                            <option value="no" style="text-align: center;">No</option>
+                          </select>
+                    </td>
+                        
+                    </tr>
+
+                    <tr style="margin-bottom: 1%;">
+                        <td><label for="party"></label><h6>PARTY</h6></td>   
+                        <td><label for="stage"></label><h6>STAGE SETTLED <a style="color: blue;"
+                            onclick="alert(stage())"><b>&#9432</b></a></h6></td>                                             
                     </tr>
                     <tr>
                         <td>
-                            <span class="input-symbol-euro">
-                                <input type="number" id="base0" name="base0" step ="any" style="width: 160px; text-align: center;" required>
-                            </span></td>
+                            <select name="party" id="party" style="width: 160px;">
+                                <option value="blank" style="text-align: center;"></option>
+                                <option value="claimant" style="text-align: center;">Claimant</option>
+                                <option value="defendant" style="text-align: center;">Defendant</option>
+                              </select>
+                        </td>
                         <td>
-                            <span class="input-symbol-percentage">
-                                <input type="number" name="interest0" step ="any" list="interest" style="width: 160px; height: 30px; text-align: center;" required/>
-                                <datalist id="interest">
-                                    <option value="8" selected="selected">Default Judgment (8%)</option>
-                                    <option value="10">Enhanced Interest (10%)</option>
-                                    <option value="2">General Damages (2%)</option>
-                                </datalist>
-            
-                            </span>
+                        <select name="stage" id="stage" style="width: 170px;">
+                            <option value="blank" style="text-align: center;"></option>
+                            <option value="1/2" style="text-align: center;">Stages 1/2</option>
+                            <option value="A" style="text-align: center;">Type A</option>
+                            <option value="A+B" style="text-align: center;">Type A + B</option>
+                            <option value="A+C" style="text-align: center;">Type A + C</option>
+                            <option value="A+B+C" style="text-align: center;">Type A + B + C</option>
+                            <option value="pre-issue" style="text-align: center;">Part 7 (Pre-Issue)</option>
+                            <option value="pre-allocation" style="text-align: center;">Part 7 (Pre-Allocation)</option>
+                            <option value="pre-listing" style="text-align: center;">Part 7 (Pre-Listing)</option>
+                            <option value="pre-trial" style="text-align: center;">Part 7 (Pre-Trial)</option>
+                            <option value="trial" style="text-align: center;">Part 7 (Trial)</option>
+                          </select>
+                    </td>                   
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td><label for="type"></label><h6>TYPE OF CASE</h6></td> 
+                        <td><label for="damages"></label><h6>DAMAGES OBTAINED</h6></td>                                               
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <select name="type" id="type" style="width: 160px; text-align: center;" required>
+                                <option value="blank" style="text-align: center;" required></option>
+                                <option value="rta" style="text-align: center;">Road Traffic</option>
+                                <option value="el" style="text-align: center;">Employer Liability</option>
+                                <option value="pl" style="text-align: center;">Public Liability</option>
+                                <option value="travel" style="text-align: center;">Travel Claims</option>
+                                <option value="indisease" style="text-align: center;">Industrial Disease</option>
+                              </select>
+                        <td>
+                            <span class="input-symbol-euro">
+                                <input type="number" id="damages" name="damages" step ="any" 
+                                style="width: 170px; height: 23px; text-align: center;" placeholder="Enter Amount" required>
+                            </span></td>
                               
                         </td>
+                        
                     </tr>
             
                     
@@ -138,45 +202,50 @@
                 <table class="center" id="center2">
                 
                     <tr>
-                        <td><label for="commence0"><h6>INCIDENT DATE</h6></label></td>
-                        <td><label for="terminate0"><h6>CLIENT POSTCODE</h6></label></td>
+                        <td><label for="moj"><h6>MOJ PORTAL <a style="color: blue;"
+                            onclick="alert(moj())"><b>&#9432</b></a></h6></label></td>
+                        <td><label for="claimed"><h6>DAMAGES CLAIMED</h6></label></td>                        
                     </tr>
             
                     <tr>
-                        <td><input type="date" id="commence0" name="commence0" style="width: 160px; text-align: center;" 
-                             required></td>
-                        <td><input type="date" id="terminate0" name="terminate0" style="width: 160px; text-align: center;"
-                             required></td>
-                        <td><input type="text" id="saver" name="saver" style="display:none;" value="Select Finish" placeholder="Select Finish" 
-                            onfocus="(this.type='date')" onblur="(this.type='text')"></td>
+                        <td style="width: 150px; text-align: center;">
+                            <select name="moj" id="moj" style="width: 160px; text-align: center;">
+                                <option value="blank" style="text-align: center;"></option>
+                                <option value="portal" style="text-align: center;"><p>Was on Portal</p></option>
+                                <option value="non-portal" style="text-align: center;"><p>Never on Portal</p></option>
+                              </select>
+                            </td>
+                        
+                        <td>
+                            <span class="input-symbol-euro">
+                                <input type="number" id="claimed" name="claimed" step ="any" 
+                                style="width: 170px; height: 23px; text-align: center;" placeholder="Enter Amount" required>
+                            </span></td>                            
+                    </tr>
+
+                </table>
+                <table class="center" id="center3">
+
+                    <tr style="margin-bottom: 1%;">
+                        <td colspan="2"><label for="part36"></label><h6>PART 36</h6></td>
+                    </tr>
+                    <tr><td colspan="2">
+                        <select name="part36" id="part36" style="width: 330px; text-align: center;">
+                            <option value="blank" style="text-align: center;"></option>
+                            <option value="claimantbeat" style="text-align: center;">Claimant Beat Own Offer at Trial</option>
+                            <option value="defexpire" style="text-align: center;">Defendant's Offer Accepted After Expiry</option>
+                            <option value="none" style="text-align: center;">None of the Above Apply</option>
+                          </select>
+                    </td>
+                        
                     </tr>
                 </table>
             
-                <table class="center" id="center3">
+                <table class="center" id="center4">
                     <br>
                 </table>
-                <br>
                 <tr>
-                    <td><input type="checkbox" id="adddate" name="adddate" value="addanother" onclick="addDate()"></td>
-                </tr>
-                <tr>
-                    <td><label for="adddate"> <p style="color: yellowgreen;">Add New Date</p></label></td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" id="addratedate" name="addratedate" value="addratedate" onclick="addRateDate()"></td>
-                </tr>
-                <tr>
-                    <td><label for="addratedate"> <p style="color: yellowgreen;">Add New Rate</p></label></td>
-                </tr>
-                <tr><br>
-                    <td><input type="checkbox" id="addPoA" name="addPoA" value="addPoA" onclick="addpoa()"></td>
-                </tr>
-                <tr>
-                    <td><label for="addPoA"> <p style="color: yellowgreen;">Add Payment on Account</p></label></td>
-                </tr><br>
-                <tr>
-                <tr>
-                    <td><input type="submit" class="btn btn-primary" value="Calculate" style="width:320px"></td>
+                    <td><input type="submit" class="btn btn-dark" value="Calculate" style="width:330px"></td>
                 </tr>
                 
             </table></form><br>
@@ -184,78 +253,737 @@
 
         </div>
 
-        <div id="EL" style="display: none;">
+        <div id="applications" style="display: none;">
+            <br><h5 style="color: gray;">Injury - Applications</h5>
+            <form action="/showApplications" method="POST">
+                <table class="center" id="center3">
 
+            
+                    <tr style="margin-bottom: 1%;">
+                        <td colspan="2"><label for="exceptions"></label><h6>LOCATION WEIGHTING <a style="color: blue;"
+                            onclick="alert(weighting())"><b>&#9432</b></a></h6></td>
+                    </tr>
+                   
+                    <tr><td colspan="2">
+                        <select name="weighting" id="weighting" style="width: 310px;">
+                            <option value="blank" style="text-align: center;"></option>
+                            <option value="yes" style="text-align: center;">Yes</option>
+                            <option value="no" style="text-align: center;">No</option>
+                          </select>
+                    </td>
+                        
+                    </tr>
+                    
+                </table>
+            
+                <table class="center" id="center4">
+                    <br>
+                </table>
+                <tr>
+                    <td><input type="submit" class="btn btn-dark" value="Calculate" style="width:320px"></td>
+                </tr>
+                
+            </table></form><br>
         </div>
 
-        <div id="Travel" style="display: none;">
+        <div id="counterclaims" style="display: none;">
+            <br><h5 style="color: gray;">Injury - RTA Counterclaims</h5>
+            <form action="/showSubstantive" method="POST">
+                
+                <table class="center" id="center1">
 
+                    <tr style="margin-bottom: 1%;">
+                        <td><label for="stage"></label><h6>STAGE SETTLED</h6></td>                                             
+                    </tr>
+                    <tr>
+                        <td>
+                        <select name="stage" id="stage" style="width: 310px;">
+                            <option value="blank" style="text-align: center;"></option>
+                            <option value="pre-issue" style="text-align: center;">Part 7 (Pre-Issue)</option>
+                            <option value="pre-allocation" style="text-align: center;">Part 7 (Pre-Allocation)</option>
+                            <option value="pre-listing" style="text-align: center;">Part 7 (Pre-Listing)</option>
+                            <option value="pre-trial" style="text-align: center;">Part 7 (Pre-Trial)</option>
+                            <option value="trial" style="text-align: center;">Part 7 (Trial)</option>
+                          </select>
+                    </td>                   
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td><label for="damages"></label><h6>DAMAGES OBTAINED</h6></td>                                               
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="input-symbol-euro">
+                                <input type="number" id="damages" name="damages" step ="any" 
+                                style="width: 310px; height: 23px; text-align: center;" placeholder="Enter Amount" required>
+                            </span></td>
+                              
+                        </td>
+                        
+                    </tr>
+            
+                    
+                </table>
+
+                <table class="center" id="center3">
+
+            
+                    <tr style="margin-bottom: 1%;">
+                        <td colspan="2"><label for="pi"></label><h6>INCLUDES PERSONAL INJURIES</h6></td>
+                    </tr>
+                   
+                    <tr><td colspan="2">
+                        <select name="pi" id="pi" style="width: 310px;">
+                            <option value="blank" style="text-align: center;"></option>
+                            <option value="yes" style="text-align: center;">Yes</option>
+                            <option value="no" style="text-align: center;">No</option>
+                          </select>
+                    </td>
+                        
+                    </tr>
+                    
+                </table>
+                <table class="center" id="center3">
+
+            
+                    <tr style="margin-bottom: 1%;">
+                        <td colspan="2"><label for="weighting"></label><h6>LOCATION WEIGHTING <a style="color: blue;"
+                            onclick="alert(weighting())"><b>&#9432</b></a></h6></td>
+                    </tr>
+                   
+                    <tr><td colspan="2">
+                        <select name="weighting" id="weighting" style="width: 310px;">
+                            <option value="blank" style="text-align: center;"></option>
+                            <option value="yes" style="text-align: center;">Yes</option>
+                            <option value="no" style="text-align: center;">No</option>
+                          </select>
+                    </td>
+                        
+                    </tr>
+                    
+                </table>
+            
+                <table class="center" id="center4">
+                    <br>
+                </table>
+                <tr>
+                    <td><input type="submit" class="btn btn-dark" value="Calculate" style="width:320px"></td>
+                </tr>
+                
+            </table></form><br>
         </div>
 
+        <div id="money" style="display: none;">
+            <br><h5 style="color: gray;">Debt - Money/Goods</h5>
+            <form action="/showMoney" method="POST">
+                <table class="center" id="center1">
+
+                    <tr style="margin-bottom: 1%;">
+                        <td><label for="empty"></label><h6>VALUE EMPTY ON CLAIM FORM</h6></td>                                             
+                    </tr>
+                    <tr>
+                        <td>
+                        <select name="empty" id="empty" style="width: 310px;">
+                            <option value="blank" style="text-align: center;"></option>
+                            <option value="yes" style="text-align: center;">Yes</option>
+                            <option value="no" style="text-align: center;">No</option>
+                          </select>
+                    </td>                   
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td><label for="debt"></label><h6>JUDGMENT DEBT <a style="color: blue;"
+                            onclick="alert(novalue())"><b>&#9432</b></a></h6></td>                                               
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="input-symbol-euro">
+                                <input type="number" id="debt" name="debt" step ="any" 
+                                style="width: 310px; height: 23px; text-align: center;" placeholder="Enter Amount" required>
+                            </span></td>
+                              
+                        </td>
+                        
+                    </tr>
+            
+                    
+                </table>
+                <table class="center" id="center3">
+
+            
+                    <tr style="margin-bottom: 1%;">
+                        <td colspan="2"><label for="personal"></label><h6>PERSONAL SERVICE ON DEFENDANT <a style="color: blue;"
+                            onclick="alert(personal())"><b>&#9432</b></a></h6></td>
+                    </tr>
+                   
+                    <tr>
+                        <td>
+                            <span class="input-symbol-euro">
+                                <input type="number" id="personal" name="personal" step ="any" 
+                                style="width: 310px; height: 23px; text-align: center;" placeholder="Enter Amount" required>
+                            </span></td>
+                              
+                        </td>
+                        
+                    </tr>
+                    
+                </table>
+            
+                <table class="center" id="center4">
+                    <br>
+                </table>
+                <tr>
+                    <td><input type="submit" class="btn btn-dark" value="Calculate" style="width:320px"></td>
+                </tr>
+                
+            </table></form><br>
+        </div>
+
+        <div id="land" style="display: none;">
+            <br><h5 style="color: gray;">Debt - Land</h5>
+            <form action="/showLand" method="POST">
+                
+                <table class="center" id="center3">
+
+                    <tr style="margin-bottom: 1%;">
+                        <td colspan="2"><label for="personal"></label><h6>PERSONAL SERVICE ON DEFENDANT <a style="color: blue;"
+                            onclick="alert(personal())"><b>&#9432</b></a></h6></td>
+                    </tr>
+                   
+                    <tr>
+                        <td>
+                            <span class="input-symbol-euro">
+                                <input type="number" id="personal" name="personal" step ="any" 
+                                style="width: 310px; height: 23px; text-align: center;" placeholder="Enter Amount" required>
+                            </span></td>
+                              
+                        </td>
+                        
+                    </tr>
+                    
+                </table>
+            
+                <table class="center" id="center4">
+                    <br>
+                </table>
+                <tr>
+                    <td><input type="submit" class="btn btn-dark" value="Calculate" style="width:320px"></td>
+                </tr>
+                
+            </table></form><br>
+        </div>
+
+        <div id="enforcement" style="display: none;">
+            <br><h5 style="color: gray;">Debt - Enforcement</h5>
+            <form action="/showEnforcement" method="POST">
+                <table class="center" id="center1">
+
+                    <tr style="margin-bottom: 1%;">
+                        <td><label for="debt"></label><h6>ENTER OUTSTANDING DEBT</h6></td>                                             
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="input-symbol-euro">
+                                <input type="number" id="debt" name="debt" step ="any" 
+                                style="width: 310px; height: 23px; text-align: center;" placeholder="Enter Amount" required>
+                            </span></td>
+                              
+                        </td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td><label for="attend"></label><h6>ATTEND COURT <a style="color: blue;"
+                            onclick="alert(attend())"><b>&#9432</b></a></h6></td>                                               
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="input-symbol-euro">
+                                <input type="number" id="attend" name="attend" step ="any" 
+                                style="width: 310px; height: 23px; text-align: center;" placeholder="Enter Amount" required>
+                            </span></td>
+                              
+                        </td>
+                        
+                    </tr>
+            
+                    
+                </table>
+            
+                <table class="center" id="center5">
+                    <br>
+                </table>
+                <tr>
+                    <td><input type="submit" class="btn btn-dark" value="Calculate" style="width:320px"></td>
+                </tr>
+                
+            </table></form><br>
+        </div>
+
+        <div id="hmrc" style="display: none;">
+            <br><h5 style="color: gray;">Other Civil - HMRC</h5>
+            <form action="/showHmrc" method="POST">
+                <table class="center" id="center1">
+
+                    <tr style="margin-bottom: 1%;">
+                        <td><label for="exceptions"></label><h6>IS THE CLAIM ELIGIBLE <a style="color: blue;"
+                            onclick="alert(eligible())"><b>&#9432</b></a></h6></td>                                             
+                    </tr>
+                    <tr><td colspan="2">
+                        <select name="exceptions" id="exceptions" style="width: 310px;">
+                            <option value="blank" style="text-align: center;"></option>
+                            <option value="yes" style="text-align: center;">Yes</option>
+                            <option value="no" style="text-align: center;">No</option>
+                          </select>
+                    </td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td><label for="damages"></label><h6>VALUE OF THE CLAIM </h6></td>                                               
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="input-symbol-euro">
+                                <input type="number" id="damages" name="damages" step ="any" 
+                                style="width: 310px; height: 23px; text-align: center;" placeholder="Enter Amount" required>
+                            </span></td>
+                              
+                        </td>
+                        
+                    </tr>   
+                </table>
+        
+            
+                <table class="center" id="center5">
+                    <br>
+                </table>
+                <tr>
+                    <td><input type="submit" class="btn btn-dark" value="Calculate" style="width:320px"></td>
+                </tr>
+                
+            </table></form><br>
+        </div>
+
+        <div id="fasttrack" style="display: none;">
+            <br><h5 style="color: gray;">Other Civil - Fast Track Trial</h5>
+            <form action="/showFasttrack" method="POST">
+                <table class="center" id="center1">
+
+                    <tr style="margin-bottom: 1%;">
+                        <td><label for="issued"></label><h6>DATE PROCEEDINGS ISSUED</h6></td>                                             
+                    </tr>
+                    <tr><td colspan="2">
+                        <input type="date" id="issued" name="issued" 
+                                style="width: 310px; height: 23px; text-align: center;" required>
+                    </td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td><label for="damages"></label><h6>VALUE OF THE CLAIM </h6></td>                                               
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="input-symbol-euro">
+                                <input type="number" id="damages" name="damages" step ="any" 
+                                style="width: 310px; height: 23px; text-align: center;" placeholder="Enter Amount" required>
+                            </span></td>
+                              
+                        </td>
+                        
+                    </tr>
+            
+                    
+                </table>
+                
+            
+                <table class="center" id="center5">
+                    <br>
+                </table>
+                <tr>
+                    <td><input type="submit" class="btn btn-dark" value="Calculate" style="width:320px"></td>
+                </tr>
+                
+            </table></form><br>
+        </div>
+
+        <div id="ip" style="display: none;">
+            <br><h5 style="color: gray;">Other Civil - Intellectual Property</h5>
+            <form action="/showIp" method="POST">
+                <table class="center" id="center1">
+
+                    <tr style="margin-bottom: 1%;">
+                        <td><label for="ipec"></label><h6>CLAIM IN IPEC</h6></td>                                             
+                    </tr>
+                    <tr><td colspan="2">
+                        <select name="ipec" id="ipec" style="width: 310px;">
+                            <option value="blank" style="text-align: center;"></option>
+                            <option value="yes" style="text-align: center;">Yes</option>
+                            <option value="no" style="text-align: center;">No</option>
+                          </select>
+                    </td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td><label for="costed"></label><h6>HAS YOUR FILE BEEN COSTED </h6></td>                                               
+                    </tr>
+                    <tr><td colspan="2">
+                        <select name="costed" id="costed" style="width: 310px;">
+                            <option value="blank" style="text-align: center;"></option>
+                            <option value="yes" style="text-align: center;">Yes</option>
+                            <option value="no" style="text-align: center;">No</option>
+                          </select>
+                    </td>
+                        
+                    </tr>
+            
+                    
+                </table>
+                <br>
+                <table class="center" id="center2">
+                
+                    <tr>
+                        
+                        <td><label for="liability"><h6>WITHIN LIABILITY LIMITS <a style="color: blue;"
+                            onclick="alert(liability())"><b>&#9432</b></a></h6></label></td>                        
+                    </tr>
+            
+                    <tr><td colspan="2">
+                        <select name="liability" id="liability" style="width: 310px;">
+                            <option value="blank" style="text-align: center;"></option>
+                            <option value="yes" style="text-align: center;">Yes</option>
+                            <option value="no" style="text-align: center;">No</option>
+                          </select>
+                    </td>
+                        
+                    </tr>
+
+                </table>
+                <br>
+                <table class="center" id="center3">
+                
+                    <tr>
+                        
+                        <td><label for="quantum"><h6>WITHIN QUANTUM LIMITS <a style="color: blue;"
+                            onclick="alert(quantum())"><b>&#9432</b></a></h6></label></td>                        
+                    </tr>
+            
+                    <tr><td colspan="2">
+                        <select name="quantum" id="quantum" style="width: 310px;">
+                            <option value="blank" style="text-align: center;"></option>
+                            <option value="yes" style="text-align: center;">Yes</option>
+                            <option value="no" style="text-align: center;">No</option>
+                          </select>
+                    </td>
+                        
+                    </tr>
+
+                </table>
+            
+                <table class="center" id="center5">
+                    <br>
+                </table>
+                <tr>
+                    <td><input type="submit" class="btn btn-dark" value="Calculate" style="width:320px"></td>
+                </tr>
+                
+            </table></form><br>
+        </div>
+
+        <div id="aarhus" style="display: none;">
+            <br><h5 style="color: gray;">Other Civil - Aarhus Convention</h5>
+            <form action="/showAarhus" method="POST">
+                <table class="center" id="center1">
+
+                    <tr style="margin-bottom: 1%;">
+                        <td><label for="who"></label><h6>WHO IS MAKING CLAIM</h6></td>                                             
+                    </tr>
+                    <tr><td colspan="2">
+                        <select name="who" id="who" style="width: 310px;">
+                            <option value="blank" style="text-align: center;"></option>
+                            <option value="individual" style="text-align: center;">Individual</option>
+                            <option value="business" style="text-align: center;">Business</option>
+                            <option value="defendant" style="text-align: center;">Defendant</option>
+                          </select>
+                    </td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td><label for="costed"></label><h6>HAS YOUR FILE BEEN COSTED </h6></td>                                               
+                    </tr>
+                    <tr><td colspan="2">
+                        <select name="costed" id="costed" style="width: 310px;">
+                            <option value="blank" style="text-align: center;"></option>
+                            <option value="yes" style="text-align: center;">Yes</option>
+                            <option value="no" style="text-align: center;">No</option>
+                          </select>
+                    </td>
+                        
+                    </tr>
+            
+                    
+                </table>
+                <br>
+                <table class="center" id="center2">
+                
+                    <tr>
+                        
+                        <td><label for="costs"><h6>ENTER YOUR GLOBAL COSTS</h6></label></td>                        
+                    </tr>
+            
+                    <tr>
+                        <td>
+                            <span class="input-symbol-euro">
+                                <input type="number" id="costs" name="costs" step ="any" 
+                                style="width: 310px; height: 23px; text-align: center;" placeholder="Enter Amount" required>
+                            </span></td>
+                              
+                        </td>
+                        
+                    </tr>
+
+                </table>
+                
+                </table>
+            
+                <table class="center" id="center5">
+                    <br>
+                </table>
+                <tr>
+                    <td><input type="submit" class="btn btn-dark" value="Calculate" style="width:320px"></td>
+                </tr>
+                
+            </table></form><br>
+        </div>
       <script>
+          function stage(){
+            var claimant = 'STAGES 1/2'+
+            '\n' +
+            'Any Portal case that concludes before Final Hearing'+
+            '\n' +
+            '\n' +'TYPE A'+
+            '\n' +
+            'Legal Representatives Costs of Final Hearing'+
+            '\n' +
+            '\n' +'TYPE B'+
+            '\n' +
+            'Advocates Costs of Final Hearing'+
+            '\n' +
+            '\n' +'TYPE C'+
+            '\n' +
+            'Advice Fee for Child Cases'+
+            '\n' +
+            '\n' +'PART 7'+
+            '\n' +
+            'Any Case that does not settle on the Portal';
+            
 
-          function getRta(){
-              console.log('RTA working')
-              document.body.style.backgroundImage='none';
-              document.body.style.background='#0275d8';
-              document.getElementById('RTA').style.display = 'block';
-              
+              return(claimant);
           }
 
-          function getEl(){
-              console.log('EL/PL working')
-              document.body.style.backgroundImage='none';
-              document.body.style.background='#0275d8';
+          function moj(){
+            var claimant = 'If a CNF form was submitted and for any reason the matter did not proceed on the portal'+
+            ', then select the "was on the portal" option';
+
+              return(claimant);
           }
 
-          function getTravel(){
-              console.log('Travel working');
-              document.body.style.backgroundImage='none';
-              document.body.style.background='#0275d8';
+          function weighting(){
+            var claimant = 'London Weighting is applied if the Client and Representative are located in the Applicable Area.'+
+            '\n' +
+            '\n' +
+            'The Applicable Area is any London Borough, Dartford or Gravesend.'+
+            '\n' +
+            '\n' +' Client - Must live in the Applicable Area'+
+            '\n' +
+            '\n' +' Representative - Must Practice in the Applicable Area';
+
+              return(claimant);
           }
 
-          function getMoney(){
-              console.log('Money working')
-              document.body.style.backgroundImage='none';
-              document.body.style.background='#5bc0de';
-              
+          function exceptions(){
+            var claimant = 'If any claim is allocated to the Multi Track it automatically escapes fixed costs'+
+            ', irrespective of whether it is submitted to the MOJ Portal.'+
+            '\n' +
+            '\n' +
+            'If a claim is not allocated to the Multi Track, then it is still possible to escape fixed costs'+
+            ' on the proviso that the claim was never submitted to the MOJ Portal and one of the following factors apply:'+
+            '\n' +
+            '\n' +
+            '1) Claimant or Defendant Acts for Deceased Person'+
+            '\n' +
+            '2) Claimant or Defendant is a Protected Party under CPR 21.2(2)'+
+            '\n' +
+            '3) In a PL claim, if the Defendant is an Individual (not sued in business capacity)'+
+            '\n' +
+            '4) The Claimant is Bankrupt'+
+            '\n' +
+            '5) The Defendant is Insolvent and Uninsured'+
+            '\n' +
+            '6) In a Disease Claim, if there is more than one employer Defendant'+
+            '\n' +
+            '7) Claims made Outside England and Wales'+
+            '\n' +
+            '8) Damages for harm/neglect to vulnerable children/adults'+
+            '\n' +
+            '9) Includes a claim for Clinical Negligence'+
+            '\n' +
+            '10) For Mesothelioma'+
+            '\n' +
+            '11) RTA claims defined by para 1.1(16) of the PAP for Low Value Personal Injury Claims in RTAs'+
+            '\n' +
+            '\n' +
+            'SMALL CLAIMS LIMIT - £1,000 EXCEPT RTA WHICH ROSE TO £5,000 from 31/05/21'+
+            '\n' +
+            '\n' +
+            'IF DAMAGES ARE BELOW SMALL CLAIMS LIMIT ANSWER YES';
+
+              return(claimant);
           }
 
-          function getLand(){
-              console.log('Land working')
-              document.body.style.backgroundImage='none';
-              document.body.style.background='#5bc0de';
+          function personal(){
+            var claimant = 'Choose How Many Defendants You Personally Served with the Claim Form'+
+            '\n' +
+            '\n' +
+            'Enter 0 If you did not personally serve the Claim Form';
+
+              return(claimant);
           }
 
-          function getEnforcing(){
-              console.log('Enforcing working');
-              document.body.style.backgroundImage='none';
-              document.body.style.background='#5bc0de';
+          function pursuant(){
+            var claimant = 'If the Court made an Order pursuant to 6.15 for service by alternative means'+
+            '\n' +
+            '\n' +
+            'Choose How Many Times Claim was Served'+
+            '\n' +
+            '\n' +
+            'Enter 0 If this does not apply';
+
+              return(claimant);
           }
 
-          function getHmrc(){
-              console.log('HMRC working');
-              document.body.style.backgroundImage='none';
-              document.body.style.background='#292b2c';
+          function otherpersonal(){
+            var claimant = 'Choose How Many Documents Other Than the Claim Form You Were Required to Personally Serve'+
+            '\n' +
+            '\n' +
+            'If You Served Outside the Jurisdiction Provision is Made in the Next Question'+
+            '\n' +
+            '\n' +
+            'Enter 0 If you did not personally serve any Documents';
+
+              return(claimant);
           }
 
-          function getFast(){
-              console.log('Fast working')
-              document.body.style.backgroundImage='none';
-              document.body.style.background='#292b2c';
-              
+          function outside(){
+            var claimant = 'Choose How Many Documents You Were Required to Personally Serve'+ ' '+
+            'Outside the Juridiction'+
+            '\n' +
+            '\n' +
+            'Enter 0 If you did not personally serve any Documents Outside the Jurisdiction';
+
+              return(claimant);
           }
 
-          function getIp(){
-              console.log('IP working')
-              document.body.style.backgroundImage='none';
-              document.body.style.background='#292b2c';
+          function attend(){
+            var claimant = 'Select How Many Hours You Have Spent in Court Questioning the Opponent'+ 
+            '\n' +
+            '\n' +
+            'Enter 0 If you have not spent any hours in Court';
+
+              return(claimant);
           }
 
-          function getAarhus(){
-              console.log('Aarhus working');
+          function eligible(){
+            var claimant = 'The Claim must have been brought by an HMRC Officer in the County Court';
+
+              return(claimant);
+          }
+
+          function ontime(){
+            var claimant = 'Did the Defendant pay within 14 days?';
+
+              return(claimant);
+          }
+
+          function novalue(){
+            var claimant = 'Enter 0 if no value was entered on Claim Form';
+
+              return(claimant);
+          }
+
+          function liability(){
+            var claimant = 'Your Liability Limits are as follows'+
+            '\n' +
+            '\n' +
+            'Particulars of Claim - £7,000'+
+            '\n' +
+            'Defence and Counterclaim - £7,000'+
+            '\n' +
+            'Reply and Defence to Counterclaim - £7,000'+
+            '\n' +
+            'Reply to Defence to Counterclaim - £3,500'+
+            '\n' +
+            'Attendance at CMC - £3,000'+
+            '\n' +
+            'Making/Responding to Application - £3,000'+
+            '\n' +
+            'Adducing/Inspecting Disclosure - £6,000'+
+            '\n' +
+            'Performing/Inspecting Experiments - £3,000'+
+            '\n' +
+            'Preparing Witness Statements- £6,000'+
+            '\n' +
+            'Preparing Expert Report - £8,000'+
+            '\n' +
+            'Trial Prep and Attendance - £16,000'+
+            '\n' +
+            'Paper Hearing Prep - £5,500';
+
+              return(claimant);
+          }
+
+          function quantum(){
+            var claimant = 'Your Quantum Limits are as follows'+
+            '\n' +
+            '\n' +
+            'Points of Claim - £3,000'+
+            '\n' +
+            'Points of Defence - £3,000'+
+            '\n' +
+            'Attendance at CMC - £3,000'+
+            '\n' +
+            'Making/Responding to Application - £3,000'+
+            '\n' +
+            'Adducing/Inspecting Disclosure - £3,000'+
+            '\n' +
+            'Preparing Witness Statements- £6,000'+
+            '\n' +
+            'Preparing Expert Report- £6,000'+
+            '\n' +
+            'Trial Prep and Attendance - £8,000'+
+            '\n' +
+            'Paper Hearing Prep - £3,000';
+
+              return(claimant);
+          }
+
+          function showHide(name){
+              listSearch = ['substantive', 'applications', 'counterclaims', 'money', 'land', 'enforcement', 
+              'hmrc', 'fasttrack', 'ip', 'aarhus'];
+
+              for (i=0; i<listSearch.length; i++){
+                  if(name != listSearch[i]){
+                      document.getElementById(listSearch[i]).style.display = 'none';
+                  }
+              }
+
               document.body.style.backgroundImage='none';
-              document.body.style.background='#292b2c';
+              document.getElementById(name).style.display = 'block';
           }
 
       </script>

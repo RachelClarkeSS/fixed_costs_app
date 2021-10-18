@@ -46,6 +46,7 @@ app.post('/showSubstantive',function(req,res){
   var linetotal4 = 0;
   var linetotal5 = 0;
   var grandtotal = 0;
+  var indisease = false;
   console.log(req.body);
 
   var results = "<table class='table table-light'><tr><th style='width: 30%'><p><b>"+
@@ -1030,8 +1031,8 @@ app.post('/showSubstantive',function(req,res){
       } else if (req.body.stage == 'trial'){
             console.log('trial');
 
-            var cap = 3790;
-            var checkcap = (req.body.damages) * 0.275;
+            var cap = 4280;
+            var checkcap = (req.body.damages) * 0.30;
             cap += checkcap;
 
             console.log(cap);
@@ -1716,13 +1717,61 @@ app.post('/showSubstantive',function(req,res){
 
   } else if (req.body.type == 'indisease'){
       console.log('indisease');
+      
       if (req.body.stage != '1/2' && req.body.stage != 'A' && req.body.stage != 'A+B' && req.body.stage != 'A+C' &&
         req.body.stage != 'A+B+C'){
+          indisease = true;
           results = '<h4>Your Claim Escapes Fixed Costs.'+'<br><br>'+
             'Industrial Disease claims that fall off the portal are subject to Standard Basis Costs.<br><br>'+
             'You need to have a Bill of Costs Drawn and Served.<br><br>'+
             'If you would like help with this please contact our <a href="https://thomas-legal.com/" target="_blank">costs experts</a></h4>';
-        } else if (req.body.damages <= 10000){
+
+         } else if (req.body.stage == '1/2'){
+                console.log('1/2');
+                  if (req.body.damages <= 10000){
+                      console.log('under £10,000')
+                      amounttotal += 300 + 600;
+                      var vat1 =  300 * 0.20;
+                      var vat2 = 600 * 0.20;
+                      linetotal1 = 300 + vat1;
+                      linetotal2 = 600 + vat2;
+                      grandtotal = linetotal1 + linetotal2;
+                      vattotal = vat1;
+                      vattotal += vat2;
+                      vat1 =  (vat1).toFixed(2);
+                      vat2 = (vat2).toFixed(2);
+                      vattotal = (vattotal).toFixed(2);
+                      linetotal1 = (linetotal1).toFixed(2);
+                      linetotal2 = (linetotal2).toFixed(2);
+                      grandtotal = (grandtotal).toFixed(2);
+                      results += 
+                      `<tr><td><h6>Stage 1</h6></td><td><h6>£300.00</h6></td><td><h6>£${vat1}</h6></td><td><h6>£${linetotal1}</h6></td></tr>`+
+                      `<tr><td><h6>Stage 2</h6></td><td><h6>£600.00</h6></td><td><h6>£${vat2}</h6></td><td><h6>£${linetotal2}</h6></td></tr>`;
+                      links = `<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.19" target="_blank">CPR Part 45.19</a>`;
+        
+                  } else{
+                      console.log('over £10,000')
+                      amounttotal += 300 + 1300;
+                      var vat1 =  300 * 0.20;
+                      var vat2 = 1300 * 0.20;
+                      linetotal1 = 300 + vat1;
+                      linetotal2 = 1300 + vat2;
+                      grandtotal = linetotal1 + linetotal2;
+                      vattotal = vat1;
+                      vattotal += vat2;
+                      vat1 =  (vat1).toFixed(2);
+                      vat2 = (vat2).toFixed(2);
+                      vattotal = (vattotal).toFixed(2);
+                      linetotal1 = (linetotal1).toFixed(2);
+                      linetotal2 = (linetotal2).toFixed(2);
+                      grandtotal = (grandtotal).toFixed(2);
+                      results += 
+                      `<tr><td><h6>Stage 1</h6></td><td><h6>£300.00</h6></td><td><h6>£${vat1}</h6></td><td><h6>£${linetotal1}</h6></td></tr>`+
+                      `<tr><td><h6>Stage 2</h6></td><td><h6>£1,300.00</h6></td><td><h6>£${vat2}</h6></td><td><h6>£${linetotal2}</h6></td></tr>`;
+                      links = `<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.19" target="_blank">CPR Part 45.19</a>`;
+                  }
+
+        } else if (req.body.damages <= 10000 && req.body.stage == 'A'){
             console.log('under £10,000')
             amounttotal += 300 + 600 + 250;
             var vat1 =  300 * 0.20;
@@ -1749,7 +1798,7 @@ app.post('/showSubstantive',function(req,res){
             `<tr><td><h6>Type A</h6></td><td><h6>£250.00</h6></td><td><h6>£${vat3}</h6></td><td><h6>£${linetotal3}</h6></td></tr>`;
             links = `<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.19" target="_blank">CPR Part 45.19</a>`;
 
-        } else{
+        } else if (req.body.damages > 10000 && req.body.stage == 'A'){
             console.log('over £10,000')
             amounttotal += 300 + 1300 + 250;
             var vat1 =  300 * 0.20;
@@ -1775,7 +1824,7 @@ app.post('/showSubstantive',function(req,res){
             `<tr><td><h6>Stage 2</h6></td><td><h6>£1,300.00</h6></td><td><h6>£${vat2}</h6></td><td><h6>£${linetotal2}</h6></td></tr>`+
             `<tr><td><h6>Type A</h6></td><td><h6>£250.00</h6></td><td><h6>£${vat3}</h6></td><td><h6>£${linetotal3}</h6></td></tr>`;
             links = `<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.19" target="_blank">CPR Part 45.19</a>`;
-        }
+        
           
       } else if (req.body.stage =='A+B'){
           console.log('A+B');
@@ -1997,60 +2046,80 @@ app.post('/showSubstantive',function(req,res){
             links = `<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.19" target="_blank">CPR Part 45.19</a>`;
         }
       }
+    }
 
   amounttotal = amounttotal.toFixed(2);
 
+  if (req.body.damages >=25000 && req.body.moj =='non-portal' || req.body.pi == 'no'){
+      console.log('coming here 1');
+    res.send(html1+'<br><br>'+results+html2);
 
-        results += `<tr><td><h6><b>TOTALS<b></h6></td><td><h6><b>£${amounttotal}<b></h6></td><td><h6><b>£${vattotal}<b></h6></td>`+
-        `<td><h6><b>£${grandtotal}<b></tr></table>`;
-    
-    
-        if (req.body.weighting == 'yes'){
-            var weighting = grandtotal * 0.125;
-            console.log(typeof weighting);
-            weighting = parseFloat(weighting);
-            console.log(typeof grandtotal);
-    
-            grandtotal = parseFloat(grandtotal);
-            grandtotal = grandtotal + weighting;
-    
-            grandtotal = grandtotal.toLocaleString("en", {minimumFractionDigits: 2});
-    
-            results += `<br><h1 style="color: grey; margin-left: 5%;`+
-            `margin-right: 5%;"><b>£${grandtotal} + disbs<b></h1>`;
-    
-            results += `(including London Weighting at 12.5%)`;
-    
-        } else {
-            grandtotal = parseFloat(grandtotal);
-            grandtotal = grandtotal.toLocaleString("en", {minimumFractionDigits: 2});
-            results += `<br><h1 style="color: grey; margin-left: 5%;`+
-            `margin-right: 5%;"><b>£${grandtotal} + disbs<b></h1>`;
-        }
-        
-        results+=`<br><br>`+ 
-        `<div style="margin-left: 5%; margin-right: 5%; color: grey"><h6 style="color: grey;">Disbursements`+ " "+
-        `are often the subject of negotiation and so are not included as "fixed" costs.`+ " "+
-        `They will need to be added to the above total.`+ " "+
-        `Prescribed disbursement limits for this type of case can be found at ${links}</h6><div>`;
-    
-        if (req.body.part36 == 'claimantbeat'){
-            if (req.body.stage !='1/2' && req.body.stage !='A' && req.body.stage != 'A+B' && 
-            req.body.stage != 'A+C' && req.body.stage != 'A+B+C'){
-                results += `<br>`+ `<h6>As the Claimant beat their Part 36 Offer at Trial, the Claimant will also be entitled to`+ " "+
-                `costs for the period following the Part 36 Offer. If you would like further advice and assistance on`+ " "+
-                `this point please contact our <a href="https://thomas-legal.com/" target="_blank">trusted costs experts</a></h6>`
-            }
-        } else if (req.body.part36 == 'defexpire'){
-            if (req.body.stage !='1/2' && req.body.stage !='A' && req.body.stage != 'A+B' && 
-            req.body.stage != 'A+C' && req.body.stage != 'A+B+C'){
-                results += `<br>`+ `<h6>As the Defendant's Part 36 Offer expired, the Claimant will also be liable for`+ " "+
-                `their costs for the period following the Part 36 Offer. If you would like further advice and assistance on`+ " "+
-                `this point please contact our <a href="https://thomas-legal.com/" target="_blank">trusted costs experts</a></h6>`
-            }
-        }
+  } else{
+    console.log('coming here 3');
+    results += `<tr><td><h6><b>TOTALS<b></h6></td><td><h6><b>£${amounttotal}<b></h6></td><td><h6><b>£${vattotal}<b></h6></td>`+
+    `<td><h6><b>£${grandtotal}<b></tr></table>`;
   
-  res.send(html1+'<br><br>'+results+html2);
+  
+    if (req.body.weighting == 'yes'){
+        var weighting = grandtotal * 0.125;
+        console.log(typeof weighting);
+        weighting = parseFloat(weighting);
+        console.log(typeof grandtotal);
+  
+        grandtotal = parseFloat(grandtotal);
+        grandtotal = grandtotal + weighting;
+  
+        grandtotal = grandtotal.toLocaleString("en", {minimumFractionDigits: 2});
+  
+        results += `<br><h1 style="color: grey; margin-left: 5%;`+
+        `margin-right: 5%;"><b>£${grandtotal} + disbs<b></h1>`;
+  
+        results += `(including London Weighting at 12.5%)`;
+  
+    } else {
+        grandtotal = parseFloat(grandtotal);
+        grandtotal = grandtotal.toLocaleString("en", {minimumFractionDigits: 2});
+        results += `<br><h1 style="color: grey; margin-left: 5%;`+
+        `margin-right: 5%;"><b>£${grandtotal} + disbs<b></h1>`;
+    }
+    
+    results+=`<br><br>`+ 
+    `<div style="margin-left: 5%; margin-right: 5%; color: grey"><h6 style="color: grey;">Disbursements`+ " "+
+    `are often the subject of negotiation and so are not included as "fixed" costs.`+ " "+
+    `They will need to be added to the above total.`+ " "+
+    `Prescribed disbursement limits for this type of case can be found at ${links}</h6><div>`;
+  
+    if (req.body.part36 == 'claimantbeat'){
+        if (req.body.stage !='1/2' && req.body.stage !='A' && req.body.stage != 'A+B' && 
+        req.body.stage != 'A+C' && req.body.stage != 'A+B+C'){
+            results += `<br>`+ `<h6>As the Claimant beat their Part 36 Offer at Trial, the Claimant will also be entitled to`+ " "+
+            `costs for the period following the Part 36 Offer. If you would like further advice and assistance on`+ " "+
+            `this point please contact our <a href="https://thomas-legal.com/" target="_blank">trusted costs experts</a></h6>`
+        }
+    } else if (req.body.part36 == 'defexpire'){
+        if (req.body.stage !='1/2' && req.body.stage !='A' && req.body.stage != 'A+B' && 
+        req.body.stage != 'A+C' && req.body.stage != 'A+B+C'){
+            results += `<br>`+ `<h6>As the Defendant's Part 36 Offer expired, the Claimant will also be liable for`+ " "+
+            `their costs for the period following the Part 36 Offer. If you would like further advice and assistance on`+ " "+
+            `this point please contact our <a href="https://thomas-legal.com/" target="_blank">trusted costs experts</a></h6>`
+        }
+    }
+  
+    if (req.body.exceptions == 'yes'){
+        results = `<h4>Your Claim does not qualify for Fixed Costs as you chose an exception`+ " "+
+        `<br><br>`+
+        `If you would like any further assistance please contact our <a href="https://thomas-legal.com/" target="_blank">trusted costs experts</a></h4>`;
+    } else if (indisease == true){
+        results = '<h4>Your Claim Escapes Fixed Costs.'+'<br><br>'+
+            'Industrial Disease claims that fall off the portal are subject to Standard Basis Costs.<br><br>'+
+            'You need to have a Bill of Costs Drawn and Served.<br><br>'+
+            'If you would like help with this please contact our <a href="https://thomas-legal.com/" target="_blank">costs experts</a></h4>';
+    }
+    
+    res.send(html1+'<br><br>'+results+html2);
+
+  }
+    
 });
 
 app.post('/showApplications',function(req,res){
@@ -2351,7 +2420,7 @@ app.post('/showMoney',function(req,res){
             `<td><h6><b>£${grandtotal}<b></tr></table>`;
             results += `<br><h1 style="color: grey; margin-left: 5%; margin-right: 5%;"><b>£${grandtotal}<b></h1>`;        
             
-            links = `<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.8" target="_blank">CPR Part 45.8</a>`;
+            links = `<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.34" target="_blank">CPR Part 45.34</a>`;
             results+=`<br><br>`+ 
             `<div style="margin-left: 5%; margin-right: 5%; color: grey"><h6 style="color: grey;">`+
             `The calculations for this type of case can be found at ${links}</h6><div>`;
@@ -2402,7 +2471,7 @@ app.post('/showMoney',function(req,res){
             `<td><h6><b>£${grandtotal}<b></tr></table>`;
             results += `<br><h1 style="color: grey; margin-left: 5%; margin-right: 5%;"><b>£${grandtotal}<b></h1>`;        
             
-            links = `<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.8" target="_blank">CPR Part 45.8</a>`;
+            links = `<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.38" target="_blank">CPR Part 45.38</a>`;
             results+=`<br><br>`+ 
             `<div style="margin-left: 5%; margin-right: 5%; color: grey"><h6 style="color: grey;">`+
             `The calculations for this type of case can be found at ${links}</h6><div>`;

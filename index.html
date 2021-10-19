@@ -8,10 +8,11 @@
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
             <style>
 
-                
+
                 body {
                     background-position: center center;
                     background-attachment: fixed;
@@ -21,6 +22,14 @@
                     height: 100%;
                     background-image: url("/main-image");
                     text-align: center;
+                    overflow-x: hidden;
+                }
+
+                html, body {
+                    width: 100%;
+                    margin: 0px;
+                    padding: 0px;
+                    overflow-x: hidden;
                 }
 
                 h3 {
@@ -55,9 +64,15 @@
                     float: left;
                     color: #f2f2f2;
                     text-align: center;
-                    padding: 24px 5%;
+                    padding: 24px;
                     text-decoration: none;
                     font-size: 17px;
+                    width: 100%;
+                }
+
+                .swal2-icon.swal2-info {
+                    border-color: blue !important;
+                    color: blue !important;
                 }
 
 
@@ -73,40 +88,40 @@
 
             <div style="min-width: 33%">
                 <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" 
-                style="width: 100%;display: inline-block;">
+                style="width: 100%;">
                   <b>Injury Law</b>
                 </button>
-                <div class="dropdown-menu" style="min-width: 33%; margin-left: -1%;">
-                  <a class="dropdown-item" onclick="showHide('substantive')" href="#1">Substantive Case</a>
-                  <a class="dropdown-item" onclick="showHide('applications')" href="#2">Applications</a>
-                  <a class="dropdown-item" onclick="showHide('counterclaims')" href="#3">RTA Counterclaims</a>
+                <div class="dropdown-menu" style="min-width: 33%;">
+                  <a class="dropdown-item" onclick="showHide('substantive')" href="#1"><b>Substantive Case</b></a>
+                  <a class="dropdown-item" onclick="showHide('applications')" href="#2"><b>Applications</b></a>
+                  <a class="dropdown-item" onclick="showHide('counterclaims')" href="#3"><b>RTA Counterclaims</b></a>
                 </div>
 
             </div>
                 
             <div style="min-width: 33%">
                 <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" 
-                style="width: 100%;display: inline-block;">
+                style="width: 100%;">
                   <b>Debt Law</b>
                 </button>
-                <div class="dropdown-menu" style="min-width: 33%; margin-left: 1%;">
-                  <a class="dropdown-item" onclick="showHide('money')" href="#1">Money/Goods</a>
-                  <a class="dropdown-item" onclick="showHide('land')" href="#2">Land</a>
-                  <a class="dropdown-item" onclick="showHide('enforcement')" href="#3">Enforcing</a>
+                <div class="dropdown-menu" style="min-width: 33%;">
+                  <a class="dropdown-item" onclick="showHide('money')" href="#1"><b>Money/Goods</b></a>
+                  <a class="dropdown-item" onclick="showHide('land')" href="#2"><b>Land</b></a>
+                  <a class="dropdown-item" onclick="showHide('enforcement')" href="#3"><b>Enforcing</b></a>
                 </div>
             </div>
                 
 
             <div style="min-width: 33%">
                 <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" 
-                style="width: 100%; display: inline-block;">
+                style="width: 100%;">
                   <b>Other Civil</b>
                 </button>
-                <div class="dropdown-menu" style="min-width: 33%; margin-left: 1%;">
-                    <a class="dropdown-item" onclick="showHide('hmrc')" href="#2">HMRC</a>
-                  <a class="dropdown-item" onclick="showHide('fasttrack')" href="#1">Fast Track</a>
-                  <a class="dropdown-item" onclick="showHide('ip')" href="#2">IP</a>
-                  <a class="dropdown-item" onclick="showHide('aarhus')" href="#3">Aarhus</a>
+                <div class="dropdown-menu" style="min-width: 33%;">
+                    <a class="dropdown-item" onclick="showHide('hmrc')" href="#2"><b>HMRC</b></a>
+                  <a class="dropdown-item" onclick="showHide('fasttrack')" href="#1"><b>Fast Track</b></a>
+                  <a class="dropdown-item" onclick="showHide('ip')" href="#2"><b>IP</b></a>
+                  <a class="dropdown-item" onclick="showHide('aarhus')" href="#3"><b>Aarhus</b></a>
                 </div>
             </div>
                 
@@ -120,9 +135,9 @@
 
                     <tr style="margin-bottom: 1%;">
                         <td><label for="exceptions"></label><h6>EXCEPTIONS <a style="color: blue;"
-                            onclick="alert(exceptions())"><b>&#9432</b></a></h6></td>
+                            onclick="(exceptions())"><b>&#9432</b></a></h6></td>
                         <td colspan="2"><label for="weighting"></label><h6>WEIGHTING <a style="color: blue;"
-                            onclick="alert(weighting())"><b>&#9432</b></a></h6></td>
+                            onclick="(weighting())"><b>&#9432</b></a></h6></td>
                     </tr>
                     <tr><td>
                         <select name="exceptions" id="exceptions" style="width: 160px";>
@@ -144,7 +159,7 @@
                     <tr style="margin-bottom: 1%;">
                         <td><label for="party"></label><h6>PARTY</h6></td>   
                         <td><label for="stage"></label><h6>STAGE SETTLED <a style="color: blue;"
-                            onclick="alert(stage())"><b>&#9432</b></a></h6></td>                                             
+                            onclick="(stage())"><b>&#9432</b></a></h6></td>                                             
                     </tr>
                     <tr>
                         <td>
@@ -203,7 +218,7 @@
                 
                     <tr>
                         <td><label for="moj"><h6>MOJ PORTAL <a style="color: blue;"
-                            onclick="alert(moj())"><b>&#9432</b></a></h6></label></td>
+                            onclick="(moj())"><b>&#9432</b></a></h6></label></td>
                         <td><label for="claimed"><h6>DAMAGES CLAIMED</h6></label></td>                        
                     </tr>
             
@@ -261,7 +276,7 @@
             
                     <tr style="margin-bottom: 1%;">
                         <td colspan="2"><label for="exceptions"></label><h6>LOCATION WEIGHTING <a style="color: blue;"
-                            onclick="alert(weighting())"><b>&#9432</b></a></h6></td>
+                            onclick="(weighting())"><b>&#9432</b></a></h6></td>
                     </tr>
                    
                     <tr><td colspan="2">
@@ -349,7 +364,7 @@
             
                     <tr style="margin-bottom: 1%;">
                         <td colspan="2"><label for="weighting"></label><h6>LOCATION WEIGHTING <a style="color: blue;"
-                            onclick="alert(weighting())"><b>&#9432</b></a></h6></td>
+                            onclick="(weighting())"><b>&#9432</b></a></h6></td>
                     </tr>
                    
                     <tr><td colspan="2">
@@ -395,7 +410,7 @@
                     
                     <tr>
                         <td><label for="debt"></label><h6>JUDGMENT DEBT <a style="color: blue;"
-                            onclick="alert(novalue())"><b>&#9432</b></a></h6></td>                                               
+                            onclick="(novalue())"><b>&#9432</b></a></h6></td>                                               
                     </tr>
                     <tr>
                         <td>
@@ -415,7 +430,7 @@
             
                     <tr style="margin-bottom: 1%;">
                         <td colspan="2"><label for="personal"></label><h6>PERSONAL SERVICE ON DEFENDANT <a style="color: blue;"
-                            onclick="alert(personal())"><b>&#9432</b></a></h6></td>
+                            onclick="(personal())"><b>&#9432</b></a></h6></td>
                     </tr>
                    
                     <tr>
@@ -449,7 +464,7 @@
 
                     <tr style="margin-bottom: 1%;">
                         <td colspan="2"><label for="personal"></label><h6>PERSONAL SERVICE ON DEFENDANT <a style="color: blue;"
-                            onclick="alert(personal())"><b>&#9432</b></a></h6></td>
+                            onclick="(personal())"><b>&#9432</b></a></h6></td>
                     </tr>
                    
                     <tr>
@@ -496,7 +511,7 @@
                     
                     <tr>
                         <td><label for="attend"></label><h6>ATTEND COURT <a style="color: blue;"
-                            onclick="alert(attend())"><b>&#9432</b></a></h6></td>                                               
+                            onclick="(attend())"><b>&#9432</b></a></h6></td>                                               
                     </tr>
                     <tr>
                         <td>
@@ -529,7 +544,7 @@
 
                     <tr style="margin-bottom: 1%;">
                         <td><label for="exceptions"></label><h6>IS THE CLAIM ELIGIBLE <a style="color: blue;"
-                            onclick="alert(eligible())"><b>&#9432</b></a></h6></td>                                             
+                            onclick="(eligible())"><b>&#9432</b></a></h6></td>                                             
                     </tr>
                     <tr><td colspan="2">
                         <select name="exceptions" id="exceptions" style="width: 310px;">
@@ -649,7 +664,7 @@
                     <tr>
                         
                         <td><label for="liability"><h6>WITHIN LIABILITY LIMITS <a style="color: blue;"
-                            onclick="alert(liability())"><b>&#9432</b></a></h6></label></td>                        
+                            onclick="(liability())"><b>&#9432</b></a></h6></label></td>                        
                     </tr>
             
                     <tr><td colspan="2">
@@ -669,7 +684,7 @@
                     <tr>
                         
                         <td><label for="quantum"><h6>WITHIN QUANTUM LIMITS <a style="color: blue;"
-                            onclick="alert(quantum())"><b>&#9432</b></a></h6></label></td>                        
+                            onclick="(quantum())"><b>&#9432</b></a></h6></label></td>                        
                     </tr>
             
                     <tr><td colspan="2">
@@ -761,215 +776,357 @@
             </table></form><br>
         </div>
       <script>
+
           function stage(){
-            var claimant = 'STAGES 1/2'+
-            '\n' +
+            var claimant = '<div style="text-align: justify; text-justify: inter-word;">'+
+            '<br><b>STAGES 1/2</b>'+
+            '<br><br>' +
             'Any Portal case that concludes before Final Hearing'+
-            '\n' +
-            '\n' +'TYPE A'+
-            '\n' +
+            '<br>' +
+            '<br>' +
+            '<b>TYPE A</b>'+
+            '<br><br>' +
             'Legal Representatives Costs of Final Hearing'+
-            '\n' +
-            '\n' +'TYPE B'+
-            '\n' +
+            '<br>' +
+            '<br>' +
+            '<b>TYPE B</b>'+
+            '<br><br>' +
             'Advocates Costs of Final Hearing'+
-            '\n' +
-            '\n' +'TYPE C'+
-            '\n' +
+            '<br>' +
+            '<br>' +
+            '<b>TYPE C</b>'+
+            '<br><br>' +
             'Advice Fee for Child Cases'+
-            '\n' +
-            '\n' +'PART 7'+
-            '\n' +
-            'Any Case that does not settle on the Portal';
+            '<br>' +
+            '<br>' +
+            '<b>PART 7</b>'+
+            '<br><br>' +
+            'Any Case that does not settle on the Portal'+
+            '</div>';
             
 
-              return(claimant);
+            Swal.fire({
+                title: 'Stage Settled',
+                html: claimant,
+                icon: 'info',
+                confirmButtonText: 'I have read this message carefully'
+            })
           }
 
           function moj(){
-            var claimant = 'If a CNF form was submitted and for any reason the matter did not proceed on the portal'+
-            ', then select the "was on the portal" option';
+            var claimant = '<div style="text-align: justify; text-justify: inter-word;">'+
+            'If a CNF form was submitted and for any reason the matter did not proceed on the portal'+
+            ', then select the "was on the portal" option'+
+            '</div>';
 
-              return(claimant);
+            Swal.fire({
+                title: 'MOJ Portal',
+                html: claimant,
+                icon: 'info',
+                confirmButtonText: 'I have read this message carefully'
+            })
           }
 
           function weighting(){
-            var claimant = 'London Weighting is applied if the Client and Representative are located in the Applicable Area.'+
-            '\n' +
-            '\n' +
+            var claimant = '<div style="text-align: justify; text-justify: inter-word;">'+
+            '<br><b>ELIGIBILITY</b>'+'<br><br>'+
+            'London Weighting is applied if the Client and Representative are located in the Applicable Area.'+
+            '<br>' +
+            '<br>' +
+            '<b>APPLICABLE AREA</b>'+'<br><br>'+
             'The Applicable Area is any London Borough, Dartford or Gravesend.'+
-            '\n' +
-            '\n' +' Client - Must live in the Applicable Area'+
-            '\n' +
-            '\n' +' Representative - Must Practice in the Applicable Area';
+            '<br>' +
+            '<br>' +
+            '<b>CLIENT</b>'+'<br><br>'+
+            'Must live in the Applicable Area'+
+            '<br>' +
+            '<br>' +
+            '<b>REPRESENTATIVE</b>'+'<br><br>' +
+            'Must Practice in the Applicable Area'+
+            '</div>';
 
-              return(claimant);
+            Swal.fire({
+                title: 'London Weighting',
+                html: claimant,
+                icon: 'info',
+                confirmButtonText: 'I have read this message carefully'
+            })
           }
 
           function exceptions(){
-            var claimant = 'If any claim is allocated to the Multi Track it automatically escapes fixed costs'+
+            var claimant = '<i>Answer YES if any of the following are true</i>'+
+            '\n' +
+            '<div style="text-align: justify; text-justify: inter-word;">'+
+            '<br>' +
+            '<br>' +
+            '<b>SCOPE</b>'+'<br>' +'<br>' +
+            'This application does not work for claims before 31/07/13, which are subject to the old fixed costs regime.'+
+            '<br>' +
+            '<br>' +
+            '<b>SMALL CLAIMS LIMIT</b>'+
+            '<br>' +
+            '<br>' +
+            '£1,000 <i>except</i> RTA which increased to £5,000 from 31/05/21.'+
+            ' If your claim falls below this threshold answer YES as it does not'+" "+
+            'qualify for fixed costs.'+
+            '<br>' +
+            '<br>' +
+            '<b>MULTI TRACK</b>'+
+            '<br>' +
+            '<br>' +
+            'If any claim is allocated to the Multi Track it <i>automatically</i> escapes fixed costs'+
             ', irrespective of whether it is submitted to the MOJ Portal.'+
-            '\n' +
-            '\n' +
+            '<br>' +
+            '<br>' +
+            '<b>OTHER EXCEPTIONS</b>'+
+            '<br>' +
+            '<br>' +
             'If a claim is not allocated to the Multi Track, then it is still possible to escape fixed costs'+
             ' on the proviso that the claim was never submitted to the MOJ Portal and one of the following factors apply:'+
-            '\n' +
-            '\n' +
-            '1) Claimant or Defendant Acts for Deceased Person'+
-            '\n' +
+            '<br>' +
+            '<br>' +
+            '<b>1) Claimant or Defendant Acts for Deceased Person'+
+            '<br>' +
+            '<br>' +
             '2) Claimant or Defendant is a Protected Party under CPR 21.2(2)'+
-            '\n' +
+            '<br>' +
+            '<br>' +
             '3) In a PL claim, if the Defendant is an Individual (not sued in business capacity)'+
-            '\n' +
+            '<br>' +
+            '<br>' +
             '4) The Claimant is Bankrupt'+
-            '\n' +
+            '<br>' +
+            '<br>' +
             '5) The Defendant is Insolvent and Uninsured'+
-            '\n' +
+            '<br>' +
+            '<br>' +
             '6) In a Disease Claim, if there is more than one employer Defendant'+
-            '\n' +
+            '<br>' +
+            '<br>' +
             '7) Claims made Outside England and Wales'+
-            '\n' +
-            '8) Damages for harm/neglect to vulnerable children/adults'+
-            '\n' +
+            '<br>' +
+            '<br>' +
+            '8) Damages for harm/neglect to vulnerable children or adults'+
+            '<br>' +
+            '<br>' +
             '9) Includes a claim for Clinical Negligence'+
-            '\n' +
+            '<br>' +
+            '<br>' +
             '10) For Mesothelioma'+
-            '\n' +
+            '<br>' +
+            '<br>' +
             '11) RTA claims defined by para 1.1(16) of the PAP for Low Value Personal Injury Claims in RTAs'+
-            '\n' +
-            '\n' +
-            'SMALL CLAIMS LIMIT - £1,000 EXCEPT RTA WHICH ROSE TO £5,000 from 31/05/21'+
-            '\n' +
-            '\n' +
-            'IF DAMAGES ARE BELOW SMALL CLAIMS LIMIT ANSWER YES';
+            '</div>';
 
-              return(claimant);
+            Swal.fire({
+                title: 'Exceptions!',
+                html: claimant,
+                icon: 'info',
+                confirmButtonText: 'I have read this message carefully'
+                
+            })
+
           }
 
           function personal(){
-            var claimant = 'Choose How Many Defendants You Personally Served with the Claim Form'+
-            '\n' +
-            '\n' +
-            'Enter 0 If you did not personally serve the Claim Form';
+            var claimant = '<div style="text-align: justify; text-justify: inter-word;">'+
+            'Choose how many Defendants were personally served with the Claim Form'+
+            '<br>' +
+            '<br>' +
+            'Enter 0 If the Claimant did not personally serve the Claim Form'+
+            '</div>';
 
-              return(claimant);
+            Swal.fire({
+                title: 'Service',
+                html: claimant,
+                icon: 'info',
+                confirmButtonText: 'I have read this message carefully'
+                
+            })
           }
 
           function pursuant(){
-            var claimant = 'If the Court made an Order pursuant to 6.15 for service by alternative means'+
-            '\n' +
-            '\n' +
+            var claimant = '<div style="text-align: justify; text-justify: inter-word;">'+
+            'If the Court made an Order pursuant to 6.15 for service by alternative means'+
+            '<br>' +
+            '<br>' +
             'Choose How Many Times Claim was Served'+
-            '\n' +
-            '\n' +
-            'Enter 0 If this does not apply';
+            '<br>' +
+            '<br>' +
+            'Enter 0 If this does not apply'+
+            '</div>';
 
-              return(claimant);
+            Swal.fire({
+                title: 'CPR Part 6.15 Service',
+                html: claimant,
+                icon: 'info',
+                confirmButtonText: 'I have read this message carefully'
+            })
           }
 
           function otherpersonal(){
-            var claimant = 'Choose How Many Documents Other Than the Claim Form You Were Required to Personally Serve'+
-            '\n' +
-            '\n' +
+            var claimant = '<div style="text-align: justify; text-justify: inter-word;">'+
+            'Choose How Many Documents Other Than the Claim Form You Were Required to Personally Serve'+
+            '<br>' +
+            '<br>' +
             'If You Served Outside the Jurisdiction Provision is Made in the Next Question'+
-            '\n' +
-            '\n' +
-            'Enter 0 If you did not personally serve any Documents';
+            '<br>' +
+            '<br>' +
+            'Enter 0 If you did not personally serve any Documents'+
+            '</div>';
 
-              return(claimant);
+            Swal.fire({
+                title: 'Other Personal Service',
+                html: claimant,
+                icon: 'info',
+                confirmButtonText: 'I have read this message carefully'
+            })
           }
 
           function outside(){
-            var claimant = 'Choose How Many Documents You Were Required to Personally Serve'+ ' '+
+            var claimant = '<div style="text-align: justify; text-justify: inter-word;">'+
+            'Choose How Many Documents You Were Required to Personally Serve'+ ' '+
             'Outside the Juridiction'+
-            '\n' +
-            '\n' +
-            'Enter 0 If you did not personally serve any Documents Outside the Jurisdiction';
+            '<br>' +
+            '<br>' +
+            'Enter 0 If you did not personally serve any Documents Outside the Jurisdiction'+
+            '</div>';
 
-              return(claimant);
+            Swal.fire({
+                title: 'Service Outside Jurisdiction',
+                html: claimant,
+                icon: 'info',
+                confirmButtonText: 'I have read this message carefully'
+            })
           }
 
           function attend(){
-            var claimant = 'Select How Many Hours You Have Spent in Court Questioning the Opponent'+ 
-            '\n' +
-            '\n' +
-            'Enter 0 If you have not spent any hours in Court';
+            var claimant = '<div style="text-align: justify; text-justify: inter-word;">'+
+            'Select how many hours the Claimant spent in Court questioning the Defendant'+ 
+            '<br>' +
+            '<br>' +
+            'Enter 0 If the Claimant did not spend any hours in Court'+
+            '</div>';
 
-              return(claimant);
+            Swal.fire({
+                title: 'Court Attendance',
+                html: claimant,
+                icon: 'info',
+                confirmButtonText: 'I have read this message carefully'
+            })
           }
 
           function eligible(){
-            var claimant = 'The Claim must have been brought by an HMRC Officer in the County Court';
+            var claimant = '<i>Answer YES if the following condition is false</i>'+
+            '\n' + '<br>'+
+            
+            '<div style="text-align: justify; text-justify: inter-word;">'+
+            '<br>'+
+            '<b>CONDITION</b>'+
+            '<br><br>'+
+            'The Claim must have been brought by an HMRC Officer in the County Court'+
+            '</div>';
 
-              return(claimant);
+            Swal.fire({
+                title: 'Exceptions!',
+                html: claimant,
+                icon: 'info',
+                confirmButtonText: 'I have read this message carefully'
+            })
           }
 
           function ontime(){
-            var claimant = 'Did the Defendant pay within 14 days?';
+            var claimant = '<div style="text-align: justify; text-justify: inter-word;">'+
+            'Did the Defendant pay within 14 days?'+
+            '</div>';
 
-              return(claimant);
+            Swal.fire({
+                title: 'Prompt Payment',
+                html: claimant,
+                icon: 'info',
+                confirmButtonText: 'I have read this message carefully'
+            })
           }
 
           function novalue(){
-            var claimant = 'Enter 0 if no value was entered on Claim Form';
+            var claimant = '<div style="text-align: justify; text-justify: inter-word;">'+
+            'In the event that no value was entered onto the Claim Form, enter 0 in this input field and proceed'+
+            '</div>';
 
-              return(claimant);
+            Swal.fire({
+                title: 'No Value on Claim Form',
+                html: claimant,
+                icon: 'info',
+                confirmButtonText: 'I have read this message carefully'
+            })
           }
 
           function liability(){
-            var claimant = 'Your Liability Limits are as follows'+
-            '\n' +
-            '\n' +
-            'Particulars of Claim - £7,000'+
-            '\n' +
-            'Defence and Counterclaim - £7,000'+
-            '\n' +
-            'Reply and Defence to Counterclaim - £7,000'+
-            '\n' +
-            'Reply to Defence to Counterclaim - £3,500'+
-            '\n' +
-            'Attendance at CMC - £3,000'+
-            '\n' +
-            'Making/Responding to Application - £3,000'+
-            '\n' +
-            'Adducing/Inspecting Disclosure - £6,000'+
-            '\n' +
-            'Performing/Inspecting Experiments - £3,000'+
-            '\n' +
-            'Preparing Witness Statements- £6,000'+
-            '\n' +
-            'Preparing Expert Report - £8,000'+
-            '\n' +
-            'Trial Prep and Attendance - £16,000'+
-            '\n' +
-            'Paper Hearing Prep - £5,500';
+            var claimant = '<table class="table table-light" style="text-align: left;">'+
+            '<tr><td><b>ITEM OF WORK</b></td><td><b>FEES</b></td></tr>'+
+  
+            '<tr><td>Particulars of Claim</td><td>£7,000</td></tr>'+
+   
+            '<tr><td>Defence and CC</td><td>£7,000</td></tr>'+
+            
+            '<tr><td>Reply/Defence to CC</td><td> £7,000</td></tr>'+
+          
+            '<tr><td>Reply to Defence to CC</td><td> £3,500</td></tr>'+
+            
+            '<tr><td>Attendance at CMC</td><td> £3,000</td></tr>'+
+            
+            '<tr><td>Make/Respond to App</td><td> £3,000</td></tr>'+
+           
+            '<tr><td>Disclosure</td><td> £6,000</td></tr>'+
+           
+            '<tr><td>Experiments</td><td> £3,000</td></tr>'+
+           
+            '<tr><td>Witness Statements</td><td> £6,000</td></tr>'+
+           
+            '<tr><td>Preparing Expert Report</td><td>£8,000</td></tr>'+
+            
+            '<tr><td>Trial Prep/Attend</td><td>£16000</td></tr>'+
+            
+            '<tr><td>Paper Hearing Prep</td><td>£5,500</td></tr>'+
+            '</table>';
 
-              return(claimant);
+            Swal.fire({
+                title: 'Liability Limits',
+                html: claimant,
+                icon: 'info',
+                confirmButtonText: 'I have read this message carefully'
+            })
           }
 
           function quantum(){
-            var claimant = 'Your Quantum Limits are as follows'+
-            '\n' +
-            '\n' +
-            'Points of Claim - £3,000'+
-            '\n' +
-            'Points of Defence - £3,000'+
-            '\n' +
-            'Attendance at CMC - £3,000'+
-            '\n' +
-            'Making/Responding to Application - £3,000'+
-            '\n' +
-            'Adducing/Inspecting Disclosure - £3,000'+
-            '\n' +
-            'Preparing Witness Statements- £6,000'+
-            '\n' +
-            'Preparing Expert Report- £6,000'+
-            '\n' +
-            'Trial Prep and Attendance - £8,000'+
-            '\n' +
-            'Paper Hearing Prep - £3,000';
+            var claimant = '<table class="table table-light" style="text-align: left;">'+
+            '<tr><td><b>ITEM OF WORK</b></td><td><b>FEES</b></td></tr>'+
 
-              return(claimant);
+            '<tr><td>Points of Claim</td><td>£3,000'+
+         
+            '<tr><td>Points of Defence</td><td>£3,000'+
+            
+            '<tr><td>Attendance at CMC</td><td>£3,000'+
+           
+            '<tr><td>Applications</td><td>£3,000'+
+            
+            '<tr><td>Disclosure</td><td>£3,000'+
+            
+            '<tr><td>Witness Statements</td><td>£6,000'+
+          
+            '<tr><td>Preparing Expert Report</td><td>£6,000'+
+           
+            '<tr><td>Trial Prep/Attend</td><td>£8,000'+
+           
+            '<tr><td>Paper Hearing Prep</td><td>£3,000'+
+            '</table>';
+
+            Swal.fire({
+                title: 'Quantum Limits',
+                html: claimant,
+                icon: 'info',
+                confirmButtonText: 'I have read this message carefully'
+            })
           }
 
           function showHide(name){

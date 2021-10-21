@@ -156,26 +156,17 @@
                         
                     </tr>
 
-                    <tr style="margin-bottom: 1%;">
-                        <td><label for="party"></label><h6>PARTY</h6></td>   
-                        <td><label for="stage"></label><h6>STAGE SETTLED <a style="color: blue;"
+                    <tr style="margin-bottom: 1%;"> 
+                        <td colspan="2"><label for="stage"></label><h6>STAGE SETTLED <a style="color: blue;"
                             onclick="(stage())"><b>&#9432</b></a></h6></td>                                             
                     </tr>
                     <tr>
-                        <td>
-                            <select name="party" id="party" style="width: 160px;">
-                                <option value="blank" style="text-align: center;"></option>
-                                <option value="claimant" style="text-align: center;">Claimant</option>
-                                <option value="defendant" style="text-align: center;">Defendant</option>
-                              </select>
-                        </td>
-                        <td>
-                        <select name="stage" id="stage" style="width: 170px;">
+                        <td colspan="2">
+                        <select name="stage" id="stage" style="width: 330px;">
                             <option value="blank" style="text-align: center;"></option>
                             <option value="1/2" style="text-align: center;">Stages 1/2</option>
                             <option value="A" style="text-align: center;">Type A</option>
                             <option value="A+B" style="text-align: center;">Type A + B</option>
-                            <option value="A+C" style="text-align: center;">Type A + C</option>
                             <option value="A+B+C" style="text-align: center;">Type A + B + C</option>
                             <option value="pre-issue" style="text-align: center;">Part 7 (Pre-Issue)</option>
                             <option value="pre-allocation" style="text-align: center;">Part 7 (Pre-Allocation)</option>
@@ -217,25 +208,20 @@
                 <table class="center" id="center2">
                 
                     <tr>
-                        <td><label for="moj"><h6>MOJ PORTAL <a style="color: blue;"
-                            onclick="(moj())"><b>&#9432</b></a></h6></label></td>
-                        <td><label for="claimed"><h6>DAMAGES CLAIMED</h6></label></td>                        
+                        <td colspan="2"><label for="moj"><h6>MOJ PORTAL <a style="color: blue;"
+                            onclick="(moj())"><b>&#9432</b></a></h6></label></td>                     
                     </tr>
             
                     <tr>
-                        <td style="width: 150px; text-align: center;">
-                            <select name="moj" id="moj" style="width: 160px; text-align: center;">
+                        <td style="width: 300px; text-align: center;" colspan="2">
+                            <select name="moj" id="moj" style="width: 330px; text-align: center;">
                                 <option value="blank" style="text-align: center;"></option>
-                                <option value="portal" style="text-align: center;"><p>Was on Portal</p></option>
-                                <option value="non-portal" style="text-align: center;"><p>Never on Portal</p></option>
+                                <option value="portal" style="text-align: center;"><p>Yes</p></option>
+                                <option value="non-portal" style="text-align: center;"><p>No</p></option>
                               </select>
                             </td>
                         
-                        <td>
-                            <span class="input-symbol-euro">
-                                <input type="number" id="claimed" name="claimed" step ="any" 
-                                style="width: 170px; height: 23px; text-align: center;" placeholder="Enter Amount" required>
-                            </span></td>                            
+                                          
                     </tr>
 
                 </table>
@@ -781,27 +767,29 @@
             var claimant = '<div style="text-align: justify; text-justify: inter-word;">'+
             '<br><b>STAGES 1/2</b>'+
             '<br><br>' +
-            'Any Portal case that concludes before Final Hearing'+
+            'Choose this option if the Defendant wins at a Stage 3 Hearing. Otherwise, choose this option for'+" "+
+            'any Portal case that concludes before the Stage 3 Hearing'+
             '<br>' +
             '<br>' +
             '<b>TYPE A</b>'+
             '<br><br>' +
-            'Legal Representatives Costs of Final Hearing'+
+            'Choose this option if the Stage 3 hearing was conducted without court attendance'+" "+
+            'and the Claimant was successful'+
             '<br>' +
             '<br>' +
-            '<b>TYPE B</b>'+
+            '<b>TYPE A + B</b>'+
             '<br><br>' +
-            'Advocates Costs of Final Hearing'+
+            'Choose this option if the hearing was attended by the parties and the Claimant was successful'+
             '<br>' +
             '<br>' +
-            '<b>TYPE C</b>'+
+            '<b>TYPE A + B + C</b>'+
             '<br><br>' +
-            'Advice Fee for Child Cases'+
+            'Choose this option if the matter involved a child and went to an Infant Approval Hearing'+
             '<br>' +
             '<br>' +
             '<b>PART 7</b>'+
             '<br><br>' +
-            'Any Case that does not settle on the Portal'+
+            'Any case that does not settle on the Portal'
             '</div>';
             
 
@@ -814,9 +802,8 @@
           }
 
           function moj(){
-            var claimant = '<div style="text-align: justify; text-justify: inter-word;">'+
-            'If a CNF form was submitted and for any reason the matter did not proceed on the portal'+
-            ', then select the "was on the portal" option'+
+            var claimant = '<div style="text-align: center; text-justify: inter-word;">'+
+            'Select YES if a CNF form was at any time submitted'+
             '</div>';
 
             Swal.fire({
@@ -830,11 +817,11 @@
           function weighting(){
             var claimant = '<div style="text-align: justify; text-justify: inter-word;">'+
             '<br><b>ELIGIBILITY</b>'+'<br><br>'+
-            'London Weighting is applied if the Client and Representative are located in the Applicable Area.'+
+            'London Weighting is applied if the Client and Representative are located in the Applicable Area'+
             '<br>' +
             '<br>' +
             '<b>APPLICABLE AREA</b>'+'<br><br>'+
-            'The Applicable Area is any London Borough, Dartford or Gravesend.'+
+            'The Applicable Area is any London Borough, Dartford or Gravesend'+
             '<br>' +
             '<br>' +
             '<b>CLIENT</b>'+'<br><br>'+
@@ -860,7 +847,8 @@
             '<br>' +
             '<br>' +
             '<b>SCOPE</b>'+'<br>' +'<br>' +
-            'This application does not work for claims before 31/07/13, which are subject to the old fixed costs regime.'+
+            'Do not use this tool to calculate costs if the cause of action was prior to 31/07/13, because '+" "+
+            'such cases are subject to the old Predictive Costs Regime and outside of the scope of this application'+
             '<br>' +
             '<br>' +
             '<b>SMALL CLAIMS LIMIT</b>'+
@@ -868,14 +856,14 @@
             '<br>' +
             '£1,000 <i>except</i> RTA which increased to £5,000 from 31/05/21.'+
             ' If your claim falls below this threshold answer YES as it does not'+" "+
-            'qualify for fixed costs.'+
+            'qualify for fixed costs'+
             '<br>' +
             '<br>' +
             '<b>MULTI TRACK</b>'+
             '<br>' +
             '<br>' +
             'If any claim is allocated to the Multi Track it <i>automatically</i> escapes fixed costs'+
-            ', irrespective of whether it is submitted to the MOJ Portal.'+
+            ', irrespective of whether it is submitted to the MOJ Portal'+
             '<br>' +
             '<br>' +
             '<b>OTHER EXCEPTIONS</b>'+

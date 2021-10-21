@@ -55,8 +55,8 @@ app.post('/showSubstantive',function(req,res){
                 "<b>VAT</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Total</b></p></th>";
 
    if (req.body.damages >=25000 && req.body.moj =='non-portal'){
-       results = '<h4>Your Claim for Costs should escape Fixed Costs as it was never submitted to the Portal and'+ ' '+
-       'damages obtained are not under the Multi Track Limit';
+       results = '<h4 style="text-align: justify; text-justify: inter-word; margin-left: 10%; margin-right: 10%;">The Claim for Costs should escape Fixed Costs as it was never submitted to the Portal and'+ ' '+
+       'the level of damages are commensurate with Multi Track claims';
 
    }else if (req.body.pi == 'no'){
      console.log('working');
@@ -343,7 +343,7 @@ app.post('/showSubstantive',function(req,res){
             linetotal2 = 300 + vat2;
             linetotal3 = 250 + vat3;
             linetotal4 = 250 + vat4;
-            linetotal5 = 150 + vat4;
+            linetotal5 = 150 + vat5;
             grandtotal = linetotal1 + linetotal2 + linetotal3 + linetotal4 + linetotal5;
             vattotal = vat1;
             vattotal += vat2;
@@ -382,7 +382,7 @@ app.post('/showSubstantive',function(req,res){
             linetotal2 = 600 + vat2;
             linetotal3 = 250 + vat3;
             linetotal4 = 250 + vat4;
-            linetotal5 = 150 + vat4;
+            linetotal5 = 150 + vat5;
             grandtotal = linetotal1 + linetotal2 + linetotal3 + linetotal4 + linetotal5;
             vattotal = vat1;
             vattotal += vat2;
@@ -503,7 +503,7 @@ app.post('/showSubstantive',function(req,res){
         } else if (req.body.stage == 'pre-listing'){
             console.log('pre-listing');
 
-            var cap = 1180;
+            var cap = 1880;
             var checkcap = (req.body.damages) * 0.20;
             cap += checkcap;
 
@@ -835,7 +835,7 @@ app.post('/showSubstantive',function(req,res){
             linetotal2 = 600 + vat2;
             linetotal3 = 250 + vat3;
             linetotal4 = 250 + vat4;
-            linetotal5 = 150 + vat4;
+            linetotal5 = 150 + vat5;
             grandtotal = linetotal1 + linetotal2 + linetotal3 + linetotal4 + linetotal5;
             vattotal = vat1;
             vattotal += vat2;
@@ -874,7 +874,7 @@ app.post('/showSubstantive',function(req,res){
             linetotal2 = 1300 + vat2;
             linetotal3 = 250 + vat3;
             linetotal4 = 250 + vat4;
-            linetotal5 = 150 + vat4;
+            linetotal5 = 150 + vat5;
             grandtotal = linetotal1 + linetotal2 + linetotal3 + linetotal4 + linetotal5;
             vattotal = vat1;
             vattotal += vat2;
@@ -928,7 +928,7 @@ app.post('/showSubstantive',function(req,res){
           } else if (req.body.damages > 5000 && req.body.damages <= 10000){
 
               var cap = 1855;
-              var checkcap = (req.body.damages - 5000) * 0.10;
+              var checkcap = (req.body.damages - 5000) * 0.125;
               cap += checkcap;
 
               amounttotal += cap;
@@ -946,7 +946,7 @@ app.post('/showSubstantive',function(req,res){
               links = `<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#45.29I" target="_blank">CPR Part 45.29I</a>`;
 
           } else if (req.body.damages > 10000){
-                var cap = 2370;
+                var cap = 2500;
                 var checkcap = (req.body.damages - 10000) * 0.10;
                 cap += checkcap;
 
@@ -969,8 +969,8 @@ app.post('/showSubstantive',function(req,res){
       } else if (req.body.stage == 'pre-allocation'){
           console.log('pre-allocation');
 
-          var cap = 2450;
-          var checkcap = (req.body.damages) * 0.175;
+          var cap = 2630;
+          var checkcap = (req.body.damages) * 0.20;
           cap += checkcap;
 
           amounttotal += cap;
@@ -990,8 +990,8 @@ app.post('/showSubstantive',function(req,res){
         } else if (req.body.stage == 'pre-listing'){
             console.log('pre-listing');
 
-            var cap = 3065;
-            var checkcap = (req.body.damages) * 0.225;
+            var cap = 3350;
+            var checkcap = (req.body.damages) * 0.25;
             cap += checkcap;
 
             amounttotal += cap;
@@ -1011,8 +1011,8 @@ app.post('/showSubstantive',function(req,res){
         } else if (req.body.stage == 'pre-trial'){
             console.log('pre-trial');
 
-            var cap = 3790;
-            var checkcap = (req.body.damages) * 0.275;
+            var cap = 4280;
+            var checkcap = (req.body.damages) * 0.30;
             cap += checkcap;
 
             amounttotal += cap;
@@ -1322,7 +1322,7 @@ app.post('/showSubstantive',function(req,res){
             linetotal2 = 600 + vat2;
             linetotal3 = 250 + vat3;
             linetotal4 = 250 + vat4;
-            linetotal5 = 150 + vat4;
+            linetotal5 = 150 + vat5;
             grandtotal = linetotal1 + linetotal2 + linetotal3 + linetotal4 + linetotal5;
             vattotal = vat1;
             vattotal += vat2;
@@ -1361,7 +1361,7 @@ app.post('/showSubstantive',function(req,res){
             linetotal2 = 1300 + vat2;
             linetotal3 = 250 + vat3;
             linetotal4 = 250 + vat4;
-            linetotal5 = 150 + vat4;
+            linetotal5 = 150 + vat5;
             grandtotal = linetotal1 + linetotal2 + linetotal3 + linetotal4 + linetotal5;
             vattotal = vat1;
             vattotal += vat2;
@@ -1722,7 +1722,7 @@ app.post('/showSubstantive',function(req,res){
         req.body.stage != 'A+B+C'){
           indisease = true;
           results = '<h4>Your Claim Escapes Fixed Costs.'+'<br><br>'+
-            'Industrial Disease claims that fall off the portal are subject to Standard Basis Costs.<br><br>'+
+            'Part 7 Industrial Disease claims are subject to Standard Basis Costs.<br><br>'+
             'You need to have a Bill of Costs Drawn and Served.<br><br>'+
             'If you would like help with this please contact our <a href="https://thomas-legal.com/" target="_blank">costs experts</a></h4>';
 
@@ -1979,7 +1979,7 @@ app.post('/showSubstantive',function(req,res){
             linetotal2 = 600 + vat2;
             linetotal3 = 250 + vat3;
             linetotal4 = 250 + vat4;
-            linetotal5 = 150 + vat4;
+            linetotal5 = 150 + vat5;
             grandtotal = linetotal1 + linetotal2 + linetotal3 + linetotal4 + linetotal5;
             vattotal = vat1;
             vattotal += vat2;
@@ -2018,7 +2018,7 @@ app.post('/showSubstantive',function(req,res){
             linetotal2 = 1300 + vat2;
             linetotal3 = 250 + vat3;
             linetotal4 = 250 + vat4;
-            linetotal5 = 150 + vat4;
+            linetotal5 = 150 + vat5;
             grandtotal = linetotal1 + linetotal2 + linetotal3 + linetotal4 + linetotal5;
             vattotal = vat1;
             vattotal += vat2;
@@ -2111,10 +2111,16 @@ app.post('/showSubstantive',function(req,res){
         `If you would like any further assistance please contact our <a href="https://thomas-legal.com/" target="_blank">trusted costs experts</a></h4>`;
     } else if (indisease == true){
         results = '<h4>Your Claim Escapes Fixed Costs.'+'<br><br>'+
-            'Industrial Disease claims that fall off the portal are subject to Standard Basis Costs.<br><br>'+
+            'Part 7 Industrial Disease claims are subject to Standard Basis Costs.<br><br>'+
             'You need to have a Bill of Costs Drawn and Served.<br><br>'+
             'If you would like help with this please contact our <a href="https://thomas-legal.com/" target="_blank">costs experts</a></h4>';
-    }
+    } else if (req.body.type == 'travel' && req.body.stage == '1/2' || req.body.stage == 'A' ||
+     req.body.stage == 'A+B' || req.body.stage == 'A+B+C'){
+        results = '<h4>Your Claim Escapes Fixed Costs.'+'<br><br>'+
+        'Part 7 Travel Claims are not subject to the MOJ Portal Scheme.<br><br>'+
+        'You need to have a Bill of Costs Drawn and Served.<br><br>'+
+        'If you would like help with this please contact our <a href="https://thomas-legal.com/" target="_blank">costs experts</a></h4>';
+     }
     
     res.send(html1+'<br><br>'+results+html2);
 

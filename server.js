@@ -2130,6 +2130,7 @@ app.post('/showSubstantive',function(req,res){
 
 app.post('/showApplications',function(req,res){
     console.log(req.body);
+
     var results = "<table class='table table-light'><tr><th style='width: 30%'><p><b>"+
                 "Item</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Amount</b></p></th>"+
                 "<th class='thead-dark' style='width: 20%'><p>"+
@@ -2137,6 +2138,7 @@ app.post('/showApplications',function(req,res){
                 `<tr><td><h6>App</h6></td><td><h6>£250.00</h6></td><td><h6>£50.00</h6></td><td><h6>£300.00</h6></td></tr>`+
                 `<tr><td><h6><b>TOTALS<b></h6></td><td><h6><b>£250.00<b></h6></td><td><h6><b>£50.00<b></h6></td>`+
                 `<td><h6><b>£300.00<b></tr></table>`;
+    
 
     if (req.body.weighting == 'no'){
         results += `<br><h1 style="color: grey; margin-left: 5%; margin-right: 5%;"><b>£300.00 + disbs<b></h1>`;
@@ -2160,35 +2162,25 @@ app.post('/showMoney',function(req,res){
     var linetotal = 0;
     var links = '';
     var vat1 = 0;
+    var isempty = false;
     var results = "<table class='table table-light'><tr><th style='width: 30%'><p><b>"+
                 "Item</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Amount</b></p></th>"+
                 "<th class='thead-dark' style='width: 20%'><p>"+
                 "<b>VAT</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Total</b></p></th>";
                 
-    if (req.body.debt < 25){
-        results = '<h4>Your Claim Escapes Fixed Costs because it is below the £25 debt limit</h4>';
-        
-    } else if (req.body.empty == 'yes'){
-
-        results += `<tr><td><h6>Item</h6></td><td><h6>£80.00</h6></td><td><h6>£16.00</h6>`+
-        `</td><td><h6>£96.00</h6></td></tr>`;
-
-        results += `<tr><td><h6><b>TOTALS<b></h6></td><td><h6><b>£80.00<b></h6></td><td><h6><b>£16.00<b></h6></td>`+
-        `<td><h6><b>£96.00<b></tr></table>`;
-        results += `<br><h1 style="color: grey; margin-left: 5%; margin-right: 5%;"><b>£96.00<b></h1>`;
-        
-    } else if (req.body.debt <= 500){
+     if (req.body.debt != 0 && req.body.debt <= 500){
         linetotal = 50.00;
         console.log(linetotal);
 
         if (req.body.personal == 1){
-            linetotal += 60.00;
+            linetotal = 60.00;
             console.log(linetotal);
         } else if (req.body.personal > 1){
-            var addtotal = (req.body.personal.length - 1) * 15.00;
+            linetotal = 60.00;
+            var addtotal = (req.body.personal - 1) * 15.00;
+            console.log(`length is ${req.body.personal.length}`)
             console.log(addtotal);
             linetotal += addtotal;
-            linetotal += 60.00;
             console.log(linetotal); 
         }
 
@@ -2208,11 +2200,11 @@ app.post('/showMoney',function(req,res){
         linetotal = 70.00;
 
         if (req.body.personal == 1){
-            linetotal += 80.00;
+            linetotal = 80.00;
         } else if (req.body.personal > 1){
-            var addtotal = (req.body.personal.length - 1) * 15.00;
+            linetotal = 80.00;
+            var addtotal = (req.body.personal - 1) * 15.00;
             linetotal += addtotal;
-            linetotal += 80.00;
         }
 
         vat1 = linetotal * 0.20;
@@ -2227,19 +2219,23 @@ app.post('/showMoney',function(req,res){
         `<td><h6><b>£${grandtotal}<b></tr></table>`;
         results += `<br><h1 style="color: grey; margin-left: 5%; margin-right: 5%;"><b>£${grandtotal}<b></h1>`;
         
-    } else if (req.body.debt > 1000 && req.body.debt <= 5000){
+    } else if (req.body.debt > 1000 && req.body.debt <= 5000 || req.body.empty == 'yes' || req.body.empty == 'no'
+    && req.body.debt=='0'){
         linetotal = 80.00;
-
+        isempty = true;
         if (req.body.personal == 1){
-            linetotal += 90.00;
+            linetotal = 90.00;
         } else if (req.body.personal > 1){
-            var addtotal = (req.body.length - 1) * 15.00;
+            linetotal = 90.00;
+            var addtotal = (req.body.personal - 1) * 15.00;
             linetotal += addtotal;
-            linetotal += 90.00;
         }
 
         vat1 = linetotal * 0.20;
         grandtotal = linetotal + vat1;
+        grandtotal = (grandtotal).toFixed(2);
+        linetotal = (linetotal).toFixed(2);
+        vat1 = vat1.toFixed(2);
         results += `<tr><td><h6>Item</h6></td><td><h6>£${linetotal}</h6></td><td><h6>£${vat1}</h6>`+
         `</td><td><h6>£${grandtotal}</h6></td></tr>`;
 
@@ -2251,11 +2247,11 @@ app.post('/showMoney',function(req,res){
         linetotal = 100.00;
 
         if (req.body.personal == 1){
-            linetotal += 110.00;
+            linetotal = 110.00;
         } else if (req.body.personal > 1){
-            var addtotal = (req.body.personal.length - 1) * 15.00;
+            linetotal = 110.00;
+            var addtotal = (req.body.personal - 1) * 15.00;
             linetotal += addtotal;
-            linetotal += 110.00;
         }
 
         vat1 = linetotal * 0.20;
@@ -2274,7 +2270,25 @@ app.post('/showMoney',function(req,res){
     links = `<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.2" target="_blank">CPR Part 45.2</a>`;
     results+=`<br><br>`+ 
         `<div style="margin-left: 5%; margin-right: 5%; color: grey"><h6 style="color: grey;">`+
-        `The calculations for this type of case can be found at ${links}</h6><div>`;
+        `The calculations for this type of case can be found at ${links}`+ `<br><br>`+
+        `If Judgment was obtained, there may be an additional fee if the requirements in 
+        <a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.4" 
+        target="_blank">CPR Part 45.4 </a>are satisfied</h6></div>`;
+
+    if (req.body.debt != 0 && req.body.debt < 25 && req.body.empty == 'no'){
+        results = '<h4>The claim is ineligible for Fixed Costs because'+'<br>'+ 
+        'the debt is below the £25 threshold in'+" "+
+        '<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.2"'+ 
+        'target="_blank">CPR Part 45.2 </a></h4></div>';
+            
+    }
+
+    if (req.body.debt != 0 && req.body.empty == 'yes'){
+        results = '<h4>You have selected an empty claim form and have not included 0 in the value box'+" "+
+        '<br><br>'+
+        'Please go back and try again</h4>';
+        
+    }
 
     res.send(html1+'<br><br>'+results+html2);
     });
@@ -2294,13 +2308,13 @@ app.post('/showMoney',function(req,res){
              linetotal = 69.50
 
          }else if (req.body.personal == 1){
-            linetotal += 77.00;
+            linetotal = 77.00;
             console.log(linetotal);
         } else if (req.body.personal > 1){
+            linetotal = 77.00;
             var addtotal = (req.body.personal - 1) * 15.00;
             console.log(addtotal);
             linetotal += addtotal;
-            linetotal += 69.50;
             console.log(linetotal); 
         }
 
@@ -2319,7 +2333,10 @@ app.post('/showMoney',function(req,res){
         links = `<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.5" target="_blank">CPR Part 45.5</a>`;
         results+=`<br><br>`+ 
             `<div style="margin-left: 5%; margin-right: 5%; color: grey"><h6 style="color: grey;">`+
-            `The calculations for this type of case can be found at ${links}</h6><div>`;
+            `The calculations for this type of case can be found at ${links}` + `<br><br>`+
+            `If Judgment was obtained, there may be an additional fee if the requirements in 
+            <a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.6" 
+            target="_blank">CPR Part 45.6 </a>are satisfied</h6></div>`;
     
         res.send(html1+'<br><br>'+results+html2);
         });
@@ -2335,9 +2352,7 @@ app.post('/showMoney',function(req,res){
                     "<th class='thead-dark' style='width: 20%'><p>"+
                     "<b>VAT</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Total</b></p></th>";
                     
-        if (req.body.debt < 25){
-            results = '<h4>Your Claim Escapes Fixed Costs because it is below the £25 debt limit</h4>';
-        } else if (req.body.debt > 25 && req.body.debt <= 250){
+        if (req.body.debt > 25 && req.body.debt <= 250){
             linetotal += 30.75;
         } else if (req.body.debt > 250 && req.body.debt <= 600){
             linetotal += 41.00;
@@ -2348,7 +2363,7 @@ app.post('/showMoney',function(req,res){
         }
 
         if (req.body.attend > 0){
-            var addup = req.body.attend * 15;
+            var addup = req.body.attend * 30;
             linetotal += addup;
         }
 
@@ -2367,7 +2382,15 @@ app.post('/showMoney',function(req,res){
         links = `<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.8" target="_blank">CPR Part 45.8</a>`;
         results+=`<br><br>`+ 
             `<div style="margin-left: 5%; margin-right: 5%; color: grey"><h6 style="color: grey;">`+
-            `The calculations for this type of case can be found at ${links}</h6><div>`;
+            `If the Claimant carried out additional work such as obtaining warrants, orders or writs, they`+" "+
+            `may be able to claim additional fees if the criteria in ${links} are satisfied</h6><div>`;
+
+        if (req.body.debt < 25){
+            results = '<h4>The claim is ineligible for Fixed Costs because'+'<br>'+ 
+            'the debt is below the £25 threshold in'+" "+
+            '<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.8"'+ 
+            'target="_blank">CPR Part 45.8 </a></h4></div>';
+        } 
     
         res.send(html1+'<br><br>'+results+html2);
         });
@@ -2384,11 +2407,7 @@ app.post('/showMoney',function(req,res){
                     "<th class='thead-dark' style='width: 20%'><p>"+
                     "<b>VAT</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Total</b></p></th>";
                     
-        if (req.body.debt < 25){
-            results = '<h4>Your Claim Escapes Fixed Costs because it is below the £25 debt limit</h4>';
-        } else if (req.body.exceptions == 'no'){
-            results = '<h4>Your Claim Escapes Fixed Costs because you have selected an Exception</h4>'
-        } else if (req.body.damages > 25 && req.body.damages <= 500){
+       if (req.body.damages > 25 && req.body.damages <= 500){
             linetotal += 33.00;
         } else if (req.body.damages > 500 && req.body.damages <= 1000){
             linetotal += 47.00;
@@ -2429,10 +2448,18 @@ app.post('/showMoney',function(req,res){
             links = `<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.34" target="_blank">CPR Part 45.34</a>`;
             results+=`<br><br>`+ 
             `<div style="margin-left: 5%; margin-right: 5%; color: grey"><h6 style="color: grey;">`+
-            `The calculations for this type of case can be found at ${links}</h6><div>`;
+            `If the Claimant carried out additional work such as obtaining warrants, orders or writs, they`+" "+
+            `may be able to claim additional fees if the criteria in ${links} are satisfied</h6><div>`;
 
         }
         
+        if (req.body.damages < 25 && req.body.exceptions == 'yes'){
+            results = '<h4>Your Claim is ineligible for Fixed Costs because the value is below the £25 threshold</h4>';
+        }
+
+        if (req.body.exceptions == 'no'){
+            results = '<h4>Your Claim is ineligible for Fixed Costs because you chose an exception</h4>';
+        }
     
         res.send(html1+'<br><br>'+results+html2);
         });
@@ -2455,7 +2482,7 @@ app.post('/showMoney',function(req,res){
             linetotal += 690.00;
         } else if (req.body.damages > 10000 && req.body.damages <= 15000){
             linetotal += 1035.00;
-        } else if (req.body.damages > 15000 && req.body.issued < '2009-04-06'){
+        } else if (req.body.damages > 15000 && req.body.issued > '2009-04-06'){
             linetotal += 1650.00;
         } else {
             linetotal = 1035.00
@@ -2477,10 +2504,11 @@ app.post('/showMoney',function(req,res){
             `<td><h6><b>£${grandtotal}<b></tr></table>`;
             results += `<br><h1 style="color: grey; margin-left: 5%; margin-right: 5%;"><b>£${grandtotal}<b></h1>`;        
             
-            links = `<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.38" target="_blank">CPR Part 45.38</a>`;
+            links = `<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.39" target="_blank">CPR Part 45.39</a>`;
             results+=`<br><br>`+ 
             `<div style="margin-left: 5%; margin-right: 5%; color: grey"><h6 style="color: grey;">`+
-            `The calculations for this type of case can be found at ${links}</h6><div>`;
+            `FTT fixed costs can be changed at the discretion of the Court,`+" "+
+            `in accordance with criteria in ${links}</h6><div>`;
 
         }
         
@@ -2495,7 +2523,7 @@ app.post('/showMoney',function(req,res){
         var results = '';
         
         if (req.body.ipec == 'no'){
-            results = '<h4>Your Claim does not qualify for Fixed Costs because it is not proceeding in the IPEC</h4>';
+            results = '<h4>The claim does not qualify for Fixed Costs because it is not proceeding in the IPEC</h4>';
         } else if (req.body.liability == 'no' || req.body.quantum == 'no'){
             results += `<h4>Your Claim exceeds the capped figures in`+ " "+
             `<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs/practice-direction-45-fixed-costs#3.1"`+

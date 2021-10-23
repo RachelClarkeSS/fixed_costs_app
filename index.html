@@ -128,6 +128,46 @@
 
         </div>
       
+        <form id="substantive" action="/substantive" method="GET">
+            
+        </form>
+
+        <form id="applications" action="/applications" method="GET">
+        
+        </form>
+
+        <form id="counterclaims" action="/counterclaims" method="GET">
+        
+        </form>
+
+        <form id="money" action="/money" method="GET">
+        
+        </form>
+
+        <form id="land" action="/land" method="GET">
+        
+        </form>
+
+        <form id="enforcement" action="/enforcement" method="GET">
+        
+        </form>
+
+        <form id="hmrc" action="/hmrc" method="GET">
+        
+        </form>
+
+        <form id="fasttrack" action="/fasttrack" method="GET">
+        
+        </form>
+
+        <form id="ip" action="/ip" method="GET">
+        
+        </form>
+
+        <form id="aarhus" action="/aarhus" method="GET">
+        
+        </form>
+
         <div id="substantive" style="display: none;">
             <br><h5 style="color: gray;">Injury - Substantive Case</h5>
             <form action="/showSubstantive" method="POST">
@@ -208,7 +248,7 @@
                 <table class="center" id="center2">
                 
                     <tr>
-                        <td colspan="2"><label for="moj"><h6>MOJ PORTAL <a style="color: blue;"
+                        <td colspan="2"><label for="moj"><h6>MoJ PORTAL <a style="color: blue;"
                             onclick="(moj())"><b>&#9432</b></a></h6></label></td>                     
                     </tr>
             
@@ -797,7 +837,7 @@
                 title: 'Stage Settled',
                 html: claimant,
                 icon: 'info',
-                confirmButtonText: 'I have read this message carefully'
+                confirmButtonText: 'Okay'
             })
           }
 
@@ -807,10 +847,10 @@
             '</div>';
 
             Swal.fire({
-                title: 'MOJ Portal',
+                title: 'MoJ Portal',
                 html: claimant,
                 icon: 'info',
-                confirmButtonText: 'I have read this message carefully'
+                confirmButtonText: 'Okay'
             })
           }
 
@@ -836,7 +876,7 @@
                 title: 'London Weighting',
                 html: claimant,
                 icon: 'info',
-                confirmButtonText: 'I have read this message carefully'
+                confirmButtonText: 'Okay'
             })
           }
 
@@ -863,14 +903,14 @@
             '<br>' +
             '<br>' +
             'If any claim is allocated to the Multi Track it <i>automatically</i> escapes fixed costs'+
-            ', irrespective of whether it is submitted to the MOJ Portal'+
+            ', irrespective of whether it is submitted to the MoJ Portal'+
             '<br>' +
             '<br>' +
             '<b>OTHER EXCEPTIONS</b>'+
             '<br>' +
             '<br>' +
             'If a claim is not allocated to the Multi Track, then it is still possible to escape fixed costs'+
-            ' on the proviso that the claim was never submitted to the MOJ Portal and one of the following factors apply:'+
+            ' on the proviso that the claim was never submitted to the MoJ Portal and one of the following factors apply:'+
             '<br>' +
             '<br>' +
             '<b>1) Claimant or Defendant Acts for Deceased Person'+
@@ -910,7 +950,7 @@
                 title: 'Exceptions!',
                 html: claimant,
                 icon: 'info',
-                confirmButtonText: 'I have read this message carefully'
+                confirmButtonText: 'Okay'
                 
             })
 
@@ -928,7 +968,7 @@
                 title: 'Service',
                 html: claimant,
                 icon: 'info',
-                confirmButtonText: 'I have read this message carefully'
+                confirmButtonText: 'Okay'
                 
             })
           }
@@ -948,7 +988,7 @@
                 title: 'CPR Part 6.15 Service',
                 html: claimant,
                 icon: 'info',
-                confirmButtonText: 'I have read this message carefully'
+                confirmButtonText: 'Okay'
             })
           }
 
@@ -967,7 +1007,7 @@
                 title: 'Other Personal Service',
                 html: claimant,
                 icon: 'info',
-                confirmButtonText: 'I have read this message carefully'
+                confirmButtonText: 'Okay'
             })
           }
 
@@ -984,7 +1024,7 @@
                 title: 'Service Outside Jurisdiction',
                 html: claimant,
                 icon: 'info',
-                confirmButtonText: 'I have read this message carefully'
+                confirmButtonText: 'Okay'
             })
           }
 
@@ -1000,7 +1040,7 @@
                 title: 'Court Attendance',
                 html: claimant,
                 icon: 'info',
-                confirmButtonText: 'I have read this message carefully'
+                confirmButtonText: 'Okay'
             })
           }
 
@@ -1019,7 +1059,7 @@
                 title: 'Exceptions!',
                 html: claimant,
                 icon: 'info',
-                confirmButtonText: 'I have read this message carefully'
+                confirmButtonText: 'Okay'
             })
           }
 
@@ -1032,7 +1072,7 @@
                 title: 'Prompt Payment',
                 html: claimant,
                 icon: 'info',
-                confirmButtonText: 'I have read this message carefully'
+                confirmButtonText: 'Okay'
             })
           }
 
@@ -1045,7 +1085,7 @@
                 title: 'No Value on Claim Form',
                 html: claimant,
                 icon: 'info',
-                confirmButtonText: 'I have read this message carefully'
+                confirmButtonText: 'Okay'
             })
           }
 
@@ -1082,7 +1122,7 @@
                 title: 'Liability Limits',
                 html: claimant,
                 icon: 'info',
-                confirmButtonText: 'I have read this message carefully'
+                confirmButtonText: 'Okay'
             })
           }
 
@@ -1102,7 +1142,7 @@
             
             '<tr><td>Witness Statements</td><td>£6,000'+
           
-            '<tr><td>Preparing Expert Report</td><td>£6,000'+
+            '<tr><td>Expert Report</td><td>£6,000'+
            
             '<tr><td>Trial Prep/Attend</td><td>£8,000'+
            
@@ -1113,22 +1153,13 @@
                 title: 'Quantum Limits',
                 html: claimant,
                 icon: 'info',
-                confirmButtonText: 'I have read this message carefully'
+                confirmButtonText: "Okay"
             })
           }
 
           function showHide(name){
-              listSearch = ['substantive', 'applications', 'counterclaims', 'money', 'land', 'enforcement', 
-              'hmrc', 'fasttrack', 'ip', 'aarhus'];
-
-              for (i=0; i<listSearch.length; i++){
-                  if(name != listSearch[i]){
-                      document.getElementById(listSearch[i]).style.display = 'none';
-                  }
-              }
-
-              document.body.style.backgroundImage='none';
-              document.getElementById(name).style.display = 'block';
+            document.getElementById(name).submit();
+              
           }
 
       </script>

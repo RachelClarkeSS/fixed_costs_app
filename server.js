@@ -14,12 +14,28 @@ content="width=device-width, initial-scale=1.0"><title>CPR Fixed Costs Assistant
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
 <style> h4{margin-top: 10%;} .topnav a {float: left;color: #f2f2f2;text-align: center;padding: 24px 5%;
   text-decoration: none;font-size: 17px;} <table style="border:1px solid black;"></style>
 </head><body><div class="topnav"><a href="/" onclick='showHome();' 
 style="width: 100%; background-color: black;"><h3>CPR 45 ASSISTANT</h3></a></div><br><br><div style="text-align: center">`;
 
-var html2 = `</div><script></script></body></html>`;
+var html2 = `<br><br><button type="button" onclick="history.back(-1)" class="btn btn-primary" 
+style="width: 30%; height: 45px; text-align: center; margin-bottom: 2%; margin-right: 2%;"><h5><b>Back
+</b></h5></button><button type="button" onclick="createPDF()" class="btn btn-danger" style="width: 30%; 
+height: 45px; text-align: center; margin-bottom: 2%;"><h5 style="color: white;"><b>PDF</b> 
+<i class="fa fa-file-pdf-o"></i><b></h5></button></div>
+<br><br><p>Seasoned Systems Limited have produced this table as a reference point only
+and do not accept any liability whatsoever based on the results provided, due to the unpredictable
+nature of the law and various nuances regarding fixed costs and their application</p> 
+<script>function goBack() {window.history.back();
+}</script></body></html>`;
+
 var links = "";
 
 
@@ -33,8 +49,48 @@ app.get('/',function(req,res){
   });
 
 app.get('/main-image',function(req,res){
-  res.sendFile(path.join(__dirname+'/rcj.jpg'));
-});
+    res.sendFile(path.join(__dirname+'/rcj.jpg'));
+  });
+
+app.get('/substantive',function(req,res){
+    res.sendFile(path.join(__dirname+'/substantive.html'));
+  });
+
+app.get('/applications',function(req,res){
+    res.sendFile(path.join(__dirname+'/applications.html'));
+  });
+
+app.get('/counterclaims',function(req,res){
+    res.sendFile(path.join(__dirname+'/counterclaims.html'));
+  });
+
+app.get('/money',function(req,res){
+    res.sendFile(path.join(__dirname+'/money.html'));
+  });
+
+app.get('/land',function(req,res){
+    res.sendFile(path.join(__dirname+'/land.html'));
+  });
+
+app.get('/enforcement',function(req,res){
+    res.sendFile(path.join(__dirname+'/enforcement.html'));
+  });
+
+app.get('/hmrc',function(req,res){
+    res.sendFile(path.join(__dirname+'/hmrc.html'));
+  });
+
+app.get('/fasttrack',function(req,res){
+    res.sendFile(path.join(__dirname+'/fasttrack.html'));
+  });
+
+app.get('/ip',function(req,res){
+    res.sendFile(path.join(__dirname+'/ip.html'));
+  });
+
+app.get('/aarhus',function(req,res){
+    res.sendFile(path.join(__dirname+'/aarhus.html'));
+  });
 
 app.post('/showSubstantive',function(req,res){
   var results = '';
@@ -76,7 +132,8 @@ app.post('/showSubstantive',function(req,res){
     `are often the subject of negotiation and so are not included as "fixed" costs.`+ " "+
     `They will need to be added to the above total.`+ " "+
     `Prescribed disbursement limits for this type of case can be found at <a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#45.29I" target="_blank">CPR Part 45.29I</a></h6><div>`;
-   
+    
+    
 
    } else if(req.body.exceptions=='yes'){
     results = '<h4>Your Claim Escapes Fixed Costs because it satisfies the exception list.'+'<br><br>'+
@@ -2114,8 +2171,9 @@ app.post('/showSubstantive',function(req,res){
             'Part 7 Industrial Disease claims are subject to Standard Basis Costs.<br><br>'+
             'You need to have a Bill of Costs Drawn and Served.<br><br>'+
             'If you would like help with this please contact our <a href="https://thomas-legal.com/" target="_blank">costs experts</a></h4>';
-    } else if (req.body.type == 'travel' && req.body.stage == '1/2' || req.body.stage == 'A' ||
-     req.body.stage == 'A+B' || req.body.stage == 'A+B+C'){
+    } else if (req.body.type == 'travel' && req.body.stage == '1/2' || req.body.type == 'travel' && 
+     req.body.stage == 'A' || req.body.type == 'travel' && req.body.stage == 'A+B' || 
+     req.body.type == 'travel' && req.body.stage == 'A+B+C'){
         results = '<h4>Your Claim Escapes Fixed Costs.'+'<br><br>'+
         'Part 7 Travel Claims are not subject to the MOJ Portal Scheme.<br><br>'+
         'You need to have a Bill of Costs Drawn and Served.<br><br>'+

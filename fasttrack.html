@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>CPR Fixed Costs Assistant</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <style>
+
+
+                html, body {
+                    text-align: center;
+                    overflow-x: hidden;
+                }
+
+                h3 {
+                    text-align: center;   
+                    color: azure; 
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 
+                    'Open Sans', 'Helvetica Neue', sans-serif;
+                }
+
+                th {
+                    text-align: center;
+                }
+
+                form {
+                    display: inline-block;
+                }
+
+                input{
+                    text-align:center;
+                 }
+                
+                 h6{
+                     font-size: 15px;
+                 }
+
+                 p{
+                     font-size: 8px;
+                 }
+
+                    /* Style the links inside the navigation bar */
+                .topnav a {
+                    float: left;
+                    color: #f2f2f2;
+                    text-align: center;
+                    padding: 24px;
+                    text-decoration: none;
+                    font-size: 17px;
+                    width: 100%;
+                }
+
+                .swal2-icon.swal2-info {
+                    border-color: blue !important;
+                    color: blue !important;
+                }
+
+
+            </style>
+        </head>
+        <body>
+        <div class="topnav">
+            <a href="/" onclick='showHome();' style="width: 100%; background-color: black;"><h3>
+                CPR 45 ASSISTANT</h3></a>
+        </div><br>
+
+        <div class="row">
+
+            <div style="min-width: 33%">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" 
+                style="width: 100%;">
+                  <b>Injury Law</b>
+                </button>
+                <div class="dropdown-menu" style="min-width: 33%;">
+                  <a class="dropdown-item" onclick="showHide('substantive')" href="#1"><b>Substantive Case</b></a>
+                  <a class="dropdown-item" onclick="showHide('applications')" href="#2"><b>Applications</b></a>
+                  <a class="dropdown-item" onclick="showHide('counterclaims')" href="#3"><b>RTA Counterclaims</b></a>
+                </div>
+
+            </div>
+                
+            <div style="min-width: 33%">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" 
+                style="width: 100%;">
+                  <b>Debt Law</b>
+                </button>
+                <div class="dropdown-menu" style="min-width: 33%;">
+                  <a class="dropdown-item" onclick="showHide('money')" href="#1"><b>Money/Goods</b></a>
+                  <a class="dropdown-item" onclick="showHide('land')" href="#2"><b>Land</b></a>
+                  <a class="dropdown-item" onclick="showHide('enforcement')" href="#3"><b>Enforcing</b></a>
+                </div>
+            </div>
+                
+
+            <div style="min-width: 33%">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" 
+                style="width: 100%;">
+                  <b>Other Civil</b>
+                </button>
+                <div class="dropdown-menu" style="min-width: 33%;">
+                    <a class="dropdown-item" onclick="showHide('hmrc')" href="#2"><b>HMRC</b></a>
+                  <a class="dropdown-item" onclick="showHide('fasttrack')" href="#1"><b>Fast Track</b></a>
+                  <a class="dropdown-item" onclick="showHide('ip')" href="#2"><b>IP</b></a>
+                  <a class="dropdown-item" onclick="showHide('aarhus')" href="#3"><b>Aarhus</b></a>
+                </div>
+            </div>
+                
+
+        </div>
+      
+        <form id="substantive" action="/substantive" method="GET">
+            
+        </form>
+
+        <form id="applications" action="/applications" method="GET">
+        
+        </form>
+
+        <form id="counterclaims" action="/counterclaims" method="GET">
+        
+        </form>
+
+        <form id="money" action="/money" method="GET">
+        
+        </form>
+
+        <form id="land" action="/land" method="GET">
+        
+        </form>
+
+        <form id="enforcement" action="/enforcement" method="GET">
+        
+        </form>
+
+        <form id="hmrc" action="/hmrc" method="GET">
+        
+        </form>
+
+        <form id="fasttrack" action="/fasttrack" method="GET">
+        
+        </form>
+
+        <form id="ip" action="/ip" method="GET">
+        
+        </form>
+
+        <form id="aarhus" action="/aarhus" method="GET">
+        
+        </form>
+
+        <div id="fasttrack">
+            <br><h5 style="color: gray;">Other Civil - Fast Track Trial</h5>
+            <form action="/showFasttrack" method="POST">
+                <table class="center" id="center1">
+
+                    <tr style="margin-bottom: 1%;">
+                        <td><label for="issued"></label><h6>DATE PROCEEDINGS ISSUED</h6></td>                                             
+                    </tr>
+                    <tr><td colspan="2">
+                        <input type="date" id="issued" name="issued" 
+                                style="width: 310px; height: 23px; text-align: center;" required>
+                    </td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td><label for="damages"></label><h6>VALUE OF THE CLAIM </h6></td>                                               
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="input-symbol-euro">
+                                <input type="number" id="damages" name="damages" step ="any" 
+                                style="width: 310px; height: 23px; text-align: center;" placeholder="Enter Amount" required>
+                            </span></td>
+                              
+                        </td>
+                        
+                    </tr>
+            
+                    
+                </table>
+                
+            
+                <table class="center" id="center5">
+                    <br>
+                </table>
+                <tr>
+                    <td><input type="submit" class="btn btn-dark" value="Calculate" style="width:320px"></td>
+                </tr>
+                
+            </table></form><br>
+        </div>
+
+      <script>
+
+          function showHide(name){
+            document.getElementById(name).submit();
+              
+          }
+
+      </script>
+
+    </body>
+        
+</html>

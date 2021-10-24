@@ -21,20 +21,74 @@ content="width=device-width, initial-scale=1.0"><title>CPR Fixed Costs Assistant
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
 <style> h4{margin-top: 10%;} .topnav a {float: left;color: #f2f2f2;text-align: center;padding: 24px 5%;
-  text-decoration: none;font-size: 17px;} <table style="border:1px solid black;"></style>
+  text-decoration: none;font-size: 17px;} body{text-align: center;}</style>
 </head><body><div class="topnav"><a href="/" onclick='showHome();' 
-style="width: 100%; background-color: black;"><h3>CPR 45 ASSISTANT</h3></a></div><br><br><div style="text-align: center">`;
+style="width: 100%; background-color: black;"><h3>CPR 45 ASSISTANT</h3></a></div>
+<div id="resultsPDF">`;
 
-var html2 = `<br><br><button type="button" onclick="history.back(-1)" class="btn btn-primary" 
-style="width: 30%; height: 45px; text-align: center; margin-bottom: 2%; margin-right: 2%;"><h5><b>Back
-</b></h5></button><button type="button" onclick="createPDF()" class="btn btn-danger" style="width: 30%; 
-height: 45px; text-align: center; margin-bottom: 2%;"><h5 style="color: white;"><b>PDF</b> 
-<i class="fa fa-file-pdf-o"></i><b></h5></button></div>
-<br><br><p>Seasoned Systems Limited have produced this table as a reference point only
-and do not accept any liability whatsoever based on the results provided, due to the unpredictable
-nature of the law and various nuances regarding fixed costs and their application</p> 
-<script>function goBack() {window.history.back();
-}</script></body></html>`;
+var html2 = `</div><br><br>
+<div id="buttons"><button type="button" onclick="history.back(-1)" 
+class="btn btn-primary" style="width: 48%; height: 5%; text-align: center; margin-bottom: 2%; 
+margin-right: 4%;"><h5><b>Back</b></h5></button><button type="button" onclick="createPDF()" 
+class="btn btn-danger" style="width: 48%; height: 5%; text-align: center; margin-bottom: 2%;">
+<h5 style="color: white;"><b>PDF</b> <i class="fa fa-file-pdf-o"></i><b></h5></button></div></div>
+<br><br><div id="disclaimer"><h6 style="margin-left: 11%; margin-right: 11%; text-align: justify;
+text-justify: inter-word;">Seasoned Systems Limited does not accept any liability whatsoever  
+for any reliance placed on the above results. It is strongly recommended to carry out
+independent research/calculations and not rely on this tool as your sole reference point</h6></div>`;
+
+var html6 = `</div><br><br>
+<div id="buttons"><button type="button" onclick="history.back(-1)" 
+class="btn btn-primary" style="width: 38%; height: 5%; text-align: center; margin-bottom: 2%; 
+margin-right: 4%;margin-left:10%;"><h5><b>Back</b></h5></button><button type="button" onclick="createPDF()" 
+class="btn btn-danger" style="width: 38%; height: 5%; text-align: center; margin-bottom: 2%; margin-right: 10%;;">
+<h5 style="color: white;"><b>PDF</b> <i class="fa fa-file-pdf-o"></i><b></h5></button></div></div>
+<br><br><div id="disclaimer"><h6 style="margin-left: 11%; margin-right: 11%; text-align: justify;
+text-justify: inter-word;">Seasoned Systems Limited does not accept any liability whatsoever  
+for any reliance placed on the above results. It is strongly recommended to carry out
+independent research/calculations and not rely on this tool as your sole reference point</h6></div>`;
+
+var html3 = `<script>function goBack() {window.history.back();}
+            
+
+function createPDF() {
+    
+    sTable = document.getElementById('resultsPDF').innerHTML;
+    showAfter = document.getElementById('showafter').innerHTML;
+    var style = "<style>";
+    style = style + "table {width: 100%;font: 14px Calibri;}";
+    style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+    style = style + "padding: 2px 3px;text-align: center;}";
+    style = style + "body{text-align: center;}";
+    style = style + "#buttons{display: none;}";
+    style = style + "#disclaimer{margin-top: -12%;}";
+    style = style + "</style>";
+    // CREATE A WINDOW OBJECT.
+    var win = window.open('', '', 'height=700,width=700');
+    win.document.write('<html><head>');
+    win.document.write('<title>Fixed Costs Results</title>');   // <title> FOR PDF HEADER.
+    win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+    win.document.write('</head>');
+    win.document.write('<body>');
+    win.document.write('<h1 style="font-family: arial;">SEASONED SYSTEMS</h1>');
+    win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+    win.document.write(showAfter);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+    win.document.write(lastpara);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+    win.document.write('</body></html>');
+    win.document.close();   // CLOSE THE CURRENT WINDOW.
+    win.print();    // PRINT THE CONTENTS.
+}
+</script></body></html>`;
+
+var html5 = `</div><br><br>
+<div id="buttons"><button type="button" onclick="history.back(-1)" 
+class="btn btn-primary" style="width: 40%; height: 5%; text-align: center; margin-bottom: 2%; 
+margin-right: 10%; margin-left: 10%"><h5><b>Back</b></h5></button>
+</div></div>
+<br><br><div id="disclaimer"><h6 style="margin-left: 11%; margin-right: 11%; text-align: justify;
+text-justify: inter-word;">Seasoned Systems Limited does not accept any liability whatsoever  
+for any reliance placed on the above results. It is strongly recommended to carry out
+independent research/calculations and not rely on this tool as your sole reference point</h6></div>`;
 
 var links = "";
 
@@ -1782,6 +1836,7 @@ app.post('/showSubstantive',function(req,res){
             'Part 7 Industrial Disease claims are subject to Standard Basis Costs.<br><br>'+
             'You need to have a Bill of Costs Drawn and Served.<br><br>'+
             'If you would like help with this please contact our <a href="https://thomas-legal.com/" target="_blank">costs experts</a></h4>';
+            html2 = html5;
 
          } else if (req.body.stage == '1/2'){
                 console.log('1/2');
@@ -2129,9 +2184,9 @@ app.post('/showSubstantive',function(req,res){
         grandtotal = grandtotal.toLocaleString("en", {minimumFractionDigits: 2});
   
         results += `<br><h1 style="color: grey; margin-left: 5%;`+
-        `margin-right: 5%;"><b>£${grandtotal} + disbs<b></h1>`;
+        `margin-right: 5%; test-align: center;"><b>£${grandtotal} + disbs<b></h1>`;
   
-        results += `(including London Weighting at 12.5%)`;
+        results += `(inc. London Weighting at 12.5%)`;
   
     } else {
         grandtotal = parseFloat(grandtotal);
@@ -2141,10 +2196,23 @@ app.post('/showSubstantive',function(req,res){
     }
     
     results+=`<br><br>`+ 
-    `<div style="margin-left: 5%; margin-right: 5%; color: grey"><h6 style="color: grey;">Disbursements`+ " "+
+    `<div style="margin-left: 11%; margin-right: 11%; text-align: justify;
+    text-justify: inter-word; margin-bottom: 0;"><h6 style="color: grey;">Disbursements`+ " "+
     `are often the subject of negotiation and so are not included as "fixed" costs.`+ " "+
     `They will need to be added to the above total.`+ " "+
     `Prescribed disbursement limits for this type of case can be found at ${links}</h6><div>`;
+
+    var lastpara = [];
+    var insertafter = '<div id="showafter" style="display: none; margin-top: -20%;"><h4>YOUR ANSWERS</h4><table>';
+    for (const [key, value] of Object.entries(req.body)) {
+        lastpara.push(key.toUpperCase(), value.toUpperCase());
+        insertafter += `<tr><td>${key.toUpperCase()}</td><td>
+        ${value.toUpperCase()}</td></tr>`;
+    }
+    insertafter += `</table></div>`;
+
+
+    results += insertafter;
   
     if (req.body.part36 == 'claimantbeat'){
         if (req.body.stage !='1/2' && req.body.stage !='A' && req.body.stage != 'A+B' && 
@@ -2163,6 +2231,7 @@ app.post('/showSubstantive',function(req,res){
     }
   
     if (req.body.exceptions == 'yes'){
+        html2 = html5;
         results = `<h4>Your Claim does not qualify for Fixed Costs as you chose an exception`+ " "+
         `<br><br>`+
         `If you would like any further assistance please contact our <a href="https://thomas-legal.com/" target="_blank">trusted costs experts</a></h4>`;
@@ -2180,7 +2249,7 @@ app.post('/showSubstantive',function(req,res){
         'If you would like help with this please contact our <a href="https://thomas-legal.com/" target="_blank">costs experts</a></h4>';
      }
     
-    res.send(html1+'<br><br>'+results+html2);
+    res.send(html1+'<br><br>'+results+html2+html3);
 
   }
     
@@ -2205,13 +2274,26 @@ app.post('/showApplications',function(req,res){
     
         results += `(including London Weighting at 12.5%)`;
     }
+
+    var lastpara = [];
+    var insertafter = '<div id="showafter" style="display: none; margin-top: -20%;"><h4>YOUR ANSWERS</h4><table>';
+    for (const [key, value] of Object.entries(req.body)) {
+        lastpara.push(key.toUpperCase(), value.toUpperCase());
+        insertafter += `<tr><td>${key.toUpperCase()}</td><td>
+        ${value.toUpperCase()}</td></tr>`;
+    }
+    insertafter += `</table></div>`;
+
     results+=`<br><br>`+ 
     `<div style="margin-left: 5%; margin-right: 5%; color: grey"><h6 style="color: grey;">Disbursements`+ " "+
     `are often the subject of negotiation and so are not included as "fixed" costs.`+ " "+
     `They will need to be added to the above total.`+ " "+
     `Prescribed disbursement limits for this type of case can be found at <a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#45.29I" target="_blank">CPR Part 45.29I</a></h6><div>`;
 
-    res.send(html1+'<br><br>'+results+html2);
+    results += insertafter;
+    
+
+    res.send(html1+'<br><br>'+results+html2+html3);
   });
 
 app.post('/showMoney',function(req,res){
@@ -2348,7 +2430,17 @@ app.post('/showMoney',function(req,res){
         
     }
 
-    res.send(html1+'<br><br>'+results+html2);
+    var lastpara = [];
+    var insertafter = '<div id="showafter" style="display: none; margin-top: -20%;"><h4>YOUR ANSWERS</h4><table>';
+    for (const [key, value] of Object.entries(req.body)) {
+        lastpara.push(key.toUpperCase(), value.toUpperCase());
+        insertafter += `<tr><td>${key.toUpperCase()}</td><td>
+        ${value.toUpperCase()}</td></tr>`;
+    }
+    insertafter += `</table></div>`;
+    results += insertafter;
+
+    res.send(html1+'<br><br>'+results+html6+html3);
     });
 
     app.post('/showLand',function(req,res){
@@ -2363,7 +2455,7 @@ app.post('/showMoney',function(req,res){
                     "<b>VAT</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Total</b></p></th>";
                     
          if (req.body.personal == 0){
-             linetotal = 69.50
+             linetotal = 69.50;
 
          }else if (req.body.personal == 1){
             linetotal = 77.00;
@@ -2396,7 +2488,17 @@ app.post('/showMoney',function(req,res){
             <a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.6" 
             target="_blank">CPR Part 45.6 </a>are satisfied</h6></div>`;
     
-        res.send(html1+'<br><br>'+results+html2);
+        var lastpara = [];
+        var insertafter = '<div id="showafter" style="display: none; margin-top: -20%;"><h4>YOUR ANSWERS</h4><table>';
+        for (const [key, value] of Object.entries(req.body)) {
+            lastpara.push(key.toUpperCase(), value.toUpperCase());
+            insertafter += `<tr><td>${key.toUpperCase()}</td><td>
+            ${value.toUpperCase()}</td></tr>`;
+        }
+        insertafter += `</table></div>`;
+        results += insertafter;
+
+        res.send(html1+'<br><br>'+results+html6+html3);
         });
 
     app.post('/showEnforcement',function(req,res){
@@ -2450,7 +2552,17 @@ app.post('/showMoney',function(req,res){
             'target="_blank">CPR Part 45.8 </a></h4></div>';
         } 
     
-        res.send(html1+'<br><br>'+results+html2);
+        var lastpara = [];
+        var insertafter = '<div id="showafter" style="display: none; margin-top: -20%;"><h4>YOUR ANSWERS</h4><table>';
+        for (const [key, value] of Object.entries(req.body)) {
+            lastpara.push(key.toUpperCase(), value.toUpperCase());
+            insertafter += `<tr><td>${key.toUpperCase()}</td><td>
+            ${value.toUpperCase()}</td></tr>`;
+        }
+        insertafter += `</table></div>`;
+        results += insertafter;
+
+        res.send(html1+'<br><br>'+results+html2+html3);
         });
 
     app.post('/showHmrc',function(req,res){
@@ -2518,8 +2630,18 @@ app.post('/showMoney',function(req,res){
         if (req.body.exceptions == 'no'){
             results = '<h4>Your Claim is ineligible for Fixed Costs because you chose an exception</h4>';
         }
+
+        var lastpara = [];
+        var insertafter = '<div id="showafter" style="display: none; margin-top: -20%;"><h4>YOUR ANSWERS</h4><table>';
+        for (const [key, value] of Object.entries(req.body)) {
+            lastpara.push(key.toUpperCase(), value.toUpperCase());
+            insertafter += `<tr><td>${key.toUpperCase()}</td><td>
+            ${value.toUpperCase()}</td></tr>`;
+        }
+        insertafter += `</table></div>`;
+        results += insertafter;
     
-        res.send(html1+'<br><br>'+results+html2);
+        res.send(html1+'<br><br>'+results+html2+html3);
         });
     
     app.post('/showFasttrack',function(req,res){
@@ -2571,8 +2693,18 @@ app.post('/showMoney',function(req,res){
         }
         
         console.log(req.body.issued > '2009-04-06');
+
+        var lastpara = [];
+        var insertafter = '<div id="showafter" style="display: none; margin-top: -20%;"><h4>YOUR ANSWERS</h4><table>';
+        for (const [key, value] of Object.entries(req.body)) {
+            lastpara.push(key.toUpperCase(), value.toUpperCase());
+            insertafter += `<tr><td>${key.toUpperCase()}</td><td>
+            ${value.toUpperCase()}</td></tr>`;
+        }
+        insertafter += `</table></div>`;
+        results += insertafter;
     
-        res.send(html1+'<br><br>'+results+html2);
+        res.send(html1+'<br><br>'+results+html2+html3);
         });
 
     app.post('/showIp',function(req,res){
@@ -2594,8 +2726,17 @@ app.post('/showMoney',function(req,res){
             `If you would like any further assistance please contact our <a href="https://thomas-legal.com/" target="_blank">trusted costs experts</a></h4>`;
         }                   
         
+        var lastpara = [];
+        var insertafter = '<div id="showafter" style="display: none; margin-top: -20%;"><h4>YOUR ANSWERS</h4><table>';
+        for (const [key, value] of Object.entries(req.body)) {
+            lastpara.push(key.toUpperCase(), value.toUpperCase());
+            insertafter += `<tr><td>${key.toUpperCase()}</td><td>
+            ${value.toUpperCase()}</td></tr>`;
+        }
+        insertafter += `</table></div>`;
+        results += insertafter;
     
-        res.send(html1+'<br><br>'+results+html2);
+        res.send(html1+'<br><br>'+results+html5);
         });
 
     app.post('/showAarhus',function(req,res){
@@ -2617,7 +2758,7 @@ app.post('/showMoney',function(req,res){
         }            
         
     
-        res.send(html1+'<br><br>'+results+html2);
+        res.send(html1+'<br><br>'+results+html5);
         });
         
 

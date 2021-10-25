@@ -20,10 +20,16 @@ content="width=device-width, initial-scale=1.0"><title>CPR Fixed Costs Assistant
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
-<style> h4{margin-top: 10%;} .topnav a {float: left;color: #f2f2f2;text-align: center;padding: 24px 5%;
-  text-decoration: none;font-size: 17px;} body{text-align: center;}</style>
-</head><body><div class="topnav"><a href="/" onclick='showHome();' 
-style="width: 100%; background-color: black;"><h3>CPR 45 ASSISTANT</h3></a></div>
+<style> h4{margin-top: 10%;} .topnav a {float: left;color: #f2f2f2;text-align: center;
+padding: 24px 5%; 
+text-decoration: none;font-size: 17px;} body{text-align: center;}u {text-decoration: none;
+border: 1px solid black;}​</style></head>
+<body>
+<div class="topnav">
+  <a href="/" onclick='showHome();' style="width: 100%; background-color: white; 
+  font-family: Arial, Helvetica, sans-serif; color: black;"><h3>
+      <u><b>SEASONED SYSTEMS</b></u></h3><h5>Fixed Costs Tool</h5></a>
+</div><br>
 <div id="resultsPDF">`;
 
 var html2 = `</div><br><br>

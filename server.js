@@ -29,7 +29,7 @@ border: 1px solid black;}​</style></head>
   <a href="/" onclick='showHome();' style="width: 100%; background-color: white; 
   font-family: Arial, Helvetica, sans-serif; color: black;"><h3>
       <u><b>SEASONED SYSTEMS</b></u></h3><h5>Fixed Costs Tool</h5></a>
-</div><br>
+</div>
 <div id="resultsPDF">`;
 
 var html2 = `</div><br><br>
@@ -165,7 +165,7 @@ app.post('/showSubstantive',function(req,res){
   var indisease = false;
   console.log(req.body);
 
-  var results = "<table class='table table-light'><tr><th style='width: 30%'><p><b>"+
+  var results = "<table class='table table-striped table-light'><tr><th style='width: 30%'><p><b>"+
                 "Item</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Amount</b></p></th>"+
                 "<th class='thead-dark' style='width: 20%'><p>"+
                 "<b>VAT</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Total</b></p></th>";
@@ -1842,7 +1842,7 @@ app.post('/showSubstantive',function(req,res){
             'Part 7 Industrial Disease claims are subject to Standard Basis Costs.<br><br>'+
             'You need to have a Bill of Costs Drawn and Served.<br><br>'+
             'If you would like help with this please contact our <a href="https://thomas-legal.com/" target="_blank">costs experts</a></h4>';
-            html2 = html5;
+            
 
          } else if (req.body.stage == '1/2'){
                 console.log('1/2');
@@ -2168,9 +2168,22 @@ app.post('/showSubstantive',function(req,res){
 
   amounttotal = amounttotal.toFixed(2);
 
-  if (req.body.damages >=25000 && req.body.moj =='non-portal' || req.body.pi == 'no'){
+  if (req.body.damages >=25000 && req.body.moj =='non-portal' || req.body.pi =='no'){
+    var lastpara = [];
+    var insertafter = '<div id="showafter" style="display: none; margin-top: -20%;"><h4>YOUR ANSWERS</h4><table>';
+    for (const [key, value] of Object.entries(req.body)) {
+        lastpara.push(key.toUpperCase(), value.toUpperCase());
+        insertafter += `<tr><td>${key.toUpperCase()}</td><td>
+        ${value.toUpperCase()}</td></tr>`;
+    }
+    insertafter += `</table></div>`;
+  
+  
+    results += insertafter;
       console.log('coming here 1');
-    res.send(html1+'<br><br>'+results+html2);
+    res.send(html1+'<br><br>'+results+html2+html3);
+
+    
 
   } else{
     console.log('coming here 3');
@@ -2202,7 +2215,7 @@ app.post('/showSubstantive',function(req,res){
     }
     
     results+=`<br><br>`+ 
-    `<div style="margin-left: 11%; margin-right: 11%; text-align: justify;
+    `<div style="margin-left: 12%; margin-right: 12%; text-align: justify;
     text-justify: inter-word; margin-bottom: 0;"><h6 style="color: grey;">Disbursements`+ " "+
     `are often the subject of negotiation and so are not included as "fixed" costs.`+ " "+
     `They will need to be added to the above total.`+ " "+
@@ -2218,8 +2231,7 @@ app.post('/showSubstantive',function(req,res){
     insertafter += `</table></div>`;
 
 
-    results += insertafter;
-  
+  results += insertafter;
     if (req.body.part36 == 'claimantbeat'){
         if (req.body.stage !='1/2' && req.body.stage !='A' && req.body.stage != 'A+B' && 
         req.body.stage != 'A+C' && req.body.stage != 'A+B+C'){
@@ -2237,15 +2249,16 @@ app.post('/showSubstantive',function(req,res){
     }
   
     if (req.body.exceptions == 'yes'){
-        html2 = html5;
         results = `<h4>Your Claim does not qualify for Fixed Costs as you chose an exception`+ " "+
         `<br><br>`+
         `If you would like any further assistance please contact our <a href="https://thomas-legal.com/" target="_blank">trusted costs experts</a></h4>`;
+        res.send(html1+'<br><br>'+results+html5+html3);
     } else if (indisease == true){
         results = '<h4>Your Claim Escapes Fixed Costs.'+'<br><br>'+
             'Part 7 Industrial Disease claims are subject to Standard Basis Costs.<br><br>'+
             'You need to have a Bill of Costs Drawn and Served.<br><br>'+
             'If you would like help with this please contact our <a href="https://thomas-legal.com/" target="_blank">costs experts</a></h4>';
+            res.send(html1+'<br><br>'+results+html5+html3);
     } else if (req.body.type == 'travel' && req.body.stage == '1/2' || req.body.type == 'travel' && 
      req.body.stage == 'A' || req.body.type == 'travel' && req.body.stage == 'A+B' || 
      req.body.type == 'travel' && req.body.stage == 'A+B+C'){
@@ -2264,7 +2277,7 @@ app.post('/showSubstantive',function(req,res){
 app.post('/showApplications',function(req,res){
     console.log(req.body);
 
-    var results = "<table class='table table-light'><tr><th style='width: 30%'><p><b>"+
+    var results = "<table class='table table-striped table-light'><tr><th style='width: 30%'><p><b>"+
                 "Item</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Amount</b></p></th>"+
                 "<th class='thead-dark' style='width: 20%'><p>"+
                 "<b>VAT</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Total</b></p></th>"+
@@ -2291,7 +2304,7 @@ app.post('/showApplications',function(req,res){
     insertafter += `</table></div>`;
 
     results+=`<br><br>`+ 
-    `<div style="margin-left: 5%; margin-right: 5%; color: grey"><h6 style="color: grey;">Disbursements`+ " "+
+    `<div style="margin-left: 12%; margin-right: 12%; color: grey"><h6 style="color: grey;">Disbursements`+ " "+
     `are often the subject of negotiation and so are not included as "fixed" costs.`+ " "+
     `They will need to be added to the above total.`+ " "+
     `Prescribed disbursement limits for this type of case can be found at <a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#45.29I" target="_blank">CPR Part 45.29I</a></h6><div>`;
@@ -2309,7 +2322,7 @@ app.post('/showMoney',function(req,res){
     var links = '';
     var vat1 = 0;
     var isempty = false;
-    var results = "<table class='table table-light'><tr><th style='width: 30%'><p><b>"+
+    var results = "<table class='table table-striped table-light'><tr><th style='width: 30%'><p><b>"+
                 "Item</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Amount</b></p></th>"+
                 "<th class='thead-dark' style='width: 20%'><p>"+
                 "<b>VAT</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Total</b></p></th>";
@@ -2455,7 +2468,7 @@ app.post('/showMoney',function(req,res){
         var linetotal = 0;
         var links = '';
         var vat1 = 0;
-        var results = "<table class='table table-light'><tr><th style='width: 30%'><p><b>"+
+        var results = "<table class='table table-striped table-light'><tr><th style='width: 30%'><p><b>"+
                     "Item</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Amount</b></p></th>"+
                     "<th class='thead-dark' style='width: 20%'><p>"+
                     "<b>VAT</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Total</b></p></th>";
@@ -2513,7 +2526,7 @@ app.post('/showMoney',function(req,res){
         var linetotal = 0;
         var links = '';
         var vat1 = 0;
-        var results = "<table class='table table-light'><tr><th style='width: 30%'><p><b>"+
+        var results = "<table class='table table-striped table-light'><tr><th style='width: 30%'><p><b>"+
                     "Item</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Amount</b></p></th>"+
                     "<th class='thead-dark' style='width: 20%'><p>"+
                     "<b>VAT</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Total</b></p></th>";
@@ -2547,7 +2560,7 @@ app.post('/showMoney',function(req,res){
         
         links = `<a href="https://www.justice.gov.uk/courts/procedure-rules/civil/rules/part45-fixed-costs#rule45.8" target="_blank">CPR Part 45.8</a>`;
         results+=`<br><br>`+ 
-            `<div style="margin-left: 5%; margin-right: 5%; color: grey"><h6 style="color: grey;">`+
+            `<div style="margin-left: 12%; margin-right: 12%; color: grey"><h6 style="color: grey;">`+
             `If the Claimant carried out additional work such as obtaining warrants, orders or writs, they`+" "+
             `may be able to claim additional fees if the criteria in ${links} are satisfied</h6><div>`;
 
@@ -2578,7 +2591,7 @@ app.post('/showMoney',function(req,res){
         var linetotal = 0;
         var links = '';
         var vat1 = 0;
-        var results = "<table class='table table-light'><tr><th style='width: 30%'><p><b>"+
+        var results = "<table class='table table-striped table-light'><tr><th style='width: 30%'><p><b>"+
                     "Item</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Amount</b></p></th>"+
                     "<th class='thead-dark' style='width: 20%'><p>"+
                     "<b>VAT</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Total</b></p></th>";
@@ -2657,7 +2670,7 @@ app.post('/showMoney',function(req,res){
         var linetotal = 0;
         var links = '';
         var vat1 = 0;
-        var results = "<table class='table table-light'><tr><th style='width: 30%'><p><b>"+
+        var results = "<table class='table table-striped table-light'><tr><th style='width: 30%'><p><b>"+
                     "Item</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Amount</b></p></th>"+
                     "<th class='thead-dark' style='width: 20%'><p>"+
                     "<b>VAT</b></p></th><th class='thead-dark' style='width: 25%'><p><b>Total</b></p></th>";
